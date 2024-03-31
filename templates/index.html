@@ -2,57 +2,40 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Title</title>
     <link href="/static/QWeather-Icons-1.6.0/font/qweather-icons.css" rel="stylesheet">
     <script src="/static/js/lunar.js"></script>
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-当前时间：<p title="现在时间" id="current-time"></p><br>
-当前日期：<p title="现在日期" id="current-date"></p><br>
-今天是：<p title="现在星期" id="current-weekday"></p><br>
-农历：<p title="现在阴历" id="current-lunar"></p><br>
-今日天气情况：<p title="今日天气情况">{{ data.today_weather_text }}</p><br>
-当前天气图标：<p title="今日天气图标"><i class="qi-{{ data.now_icon }}"></i></p><br>
-当前天气描述：<p title="当前天气描述">{{ data.now_weather }}</p><br>
-当前气温：<p title="当前气温">{{ data.now_temp }}</p><br>
-当天最低温度：<p title="当天最低温度">{{ data.today_lowest_temp }}</p><br>
-当天最高温度：<p title="当天最高温度">{{ data.today_highest_temp }}</p><br>
-当前整点小时：<p title="当前整点小时" id="current-hour"></p>
-2小时后整点小时：<p title="当前整点小时" id="2-hours-later"></p>
-4小时后整点小时：<p title="当前整点小时" id="4-hours-later"></p>
-6小时后整点小时：<p title="当前整点小时" id="6-hours-later"></p>
-8小时后整点小时：<p title="当前整点小时" id="8-hours-later"></p>
-10小时后整点小时：<p title="当前整点小时" id="10-hours-later"></p>
-12小时后整点小时：<p title="当前整点小时" id="12-hours-later"></p>
-2小时后整点气温：<p title="2小时后整点气温">{{ data.a2h_temp }}</p><br>
-4小时后整点气温：<p title="4小时后整点气温">{{ data.a4h_temp }}</p><br>
-6小时后整点气温：<p title="6小时后整点气温">{{ data.a6h_temp }}</p><br>
-8小时后整点气温：<p title="8小时后整点气温">{{ data.a8h_temp }}</p><br>
-10小时后整点气温：<p title="10小时后整点气温">{{ data.a10h_temp }}</p><br>
-12小时后整点气温：<p title="12小时后整点气温">{{ data.a12h_temp }}</p><br>
-2小时后整点天气图标：<p title="2小时后整点天气图标"><i class="qi-{{ data.a2h_icon }}"></i></p><br>
-4小时后整点天气图标：<p title="4小时后整点天气图标"><i class="qi-{{ data.a2h_icon }}"></i></p><br>
-6小时后整点天气图标：<p title="6小时后整点天气图标"><i class="qi-{{ data.a2h_icon }}"></i></p><br>
-8小时后整点天气图标：<p title="8小时后整点天气图标"><i class="qi-{{ data.a2h_icon }}"></i></p><br>
-10小时后整点天气图标：<p title="10小时后整点天气图标"><i class="qi-{{ data.a2h_icon }}"></i></p><br>
-12小时后整点天气图标：<p title="12小时后整点天气图标"><i class="qi-{{ data.a2h_icon }}"></i></p><br>
-2小时后整点降水量：<p title="2小时后整点降水量">{{ data.a2h_precip }}</p><br>
-4小时后整点降水量：<p title="4小时后整点降水量">{{ data.a4h_precip }}</p><br>
-6小时后整点降水量：<p title="6小时后整点降水量">{{ data.a6h_precip }}</p><br>
-8小时后整点降水量：<p title="8小时后整点降水量">{{ data.a8h_precip }}</p><br>
-10小时后整点降水量：<p title="10小时后整点降水量">{{ data.a10h_precip }}</p><br>
-12小时后整点降水量：<p title="12小时后整点降水量">{{ data.a12h_precip }}</p><br>
-{% if weather_warnings.warning_exist == 0 %}
-    <p>无预警</p>
-{% else %}
-    <div style="background-color: {{ weather_warnings.severity_color }}">
-    预警颜色：<p title="预警颜色">{{ weather_warnings.level }}</p><br>
-预警代码：<p title="预警代码">{{ weather_warnings.type }}</p> <br>
-预警类别：<p title="预警类别">{{ weather_warnings.typeName }}</p><br>
-预警图标：<p title="预警图标"><i class="qi-{{ weather_warnings.type }}"></i></p>
-    </div>
-{% endif %}
+    <div class="background">
+        <div class="container">
+            <div class="square">
+                <p title="现在时间" id="current-time"></p><br>
+                <p title="现在日期" id="current-date"></p><br>
+                <p title="现在星期" id="current-weekday"></p><br>
+                <p title="现在阴历" id="current-lunar"></p><br>
+            </div>
+            <div class="square">
+                <div id="weather-icon" style="display: block;width: 100px;height: 100px">
+                    <p title="今日天气图标"><i class="qi-{{ data.now_icon }}"></i></p>
+                </div>
+                <div id="current-weather">
+                    <p title="当前天气描述">{{ data.now_weather }}</p><br>
+                </div>
+                <div id="today-temp">
+                    <p title="当天最低温度">{{ data.today_lowest_temp }}</p><br>
+                    <p title="当前气温">{{ data.now_temp }}</p><br>
+                    <p title="当天最高温度">{{ data.today_highest_temp }}</p><br>
+                </div>
+            </div>
+            <div class="rectangle">
 
+
+            </div>
+        </div>
+    </div>
 <script>
     // 更新当前时间
     function updateCurrentTime() {
