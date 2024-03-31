@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/qweather-icons@1.6.0/font/qweather-icons.css" rel="stylesheet">
+    <script src="/static/js/lunar.js"></script>
+</head>
+<body>
+当前时间：<p title="现在时间" id="current-time"></p><br>
+当前日期：<p title="现在日期" id="current-date"></p><br>
+今天是：<p title="现在星期" id="current-weekday"></p><br>
+农历：<p title="现在阴历" id="current-lunar"></p><br>
+今日天气情况：<p title="今日天气情况">{{ data.today_weather_text }}</p><br>
+当前天气图标：<p title="今日天气图标"><i class="qi-{{ data.now_icon }}"></i></p><br>
+当前天气描述：<p title="当前天气描述">{{ data.now_weather }}</p><br>
+当前气温：<p title="当前气温">{{ data.now_temp }}</p><br>
+当天最低温度：<p title="当天最低温度">{{ data.today_lowest_temp }}</p><br>
+当天最高温度：<p title="当天最高温度">{{ data.today_highest_temp }}</p><br>
+当前整点小时：<p title="当前整点小时" id="current-hour"></p>
+2小时后整点小时：<p title="当前整点小时" id="2-hours-later"></p>
+4小时后整点小时：<p title="当前整点小时" id="4-hours-later"></p>
+6小时后整点小时：<p title="当前整点小时" id="6-hours-later"></p>
+8小时后整点小时：<p title="当前整点小时" id="8-hours-later"></p>
+10小时后整点小时：<p title="当前整点小时" id="10-hours-later"></p>
+12小时后整点小时：<p title="当前整点小时" id="12-hours-later"></p>
+2小时后整点气温：<p title="2小时后整点气温">{{ data.a2h_temp }}</p><br>
+4小时后整点气温：<p title="4小时后整点气温">{{ data.a4h_temp }}</p><br>
+6小时后整点气温：<p title="6小时后整点气温">{{ data.a6h_temp }}</p><br>
+8小时后整点气温：<p title="8小时后整点气温">{{ data.a8h_temp }}</p><br>
+10小时后整点气温：<p title="10小时后整点气温">{{ data.a10h_temp }}</p><br>
+12小时后整点气温：<p title="12小时后整点气温">{{ data.a12h_temp }}</p><br>
+2小时后整点天气图标：<p title="2小时后整点天气图标"><i class="qi-{{ data.a2h_icon }}"></i></p><br>
+4小时后整点天气图标：<p title="4小时后整点天气图标"><i class="qi-{{ data.a2h_icon }}"></i></p><br>
+6小时后整点天气图标：<p title="6小时后整点天气图标"><i class="qi-{{ data.a2h_icon }}"></i></p><br>
+8小时后整点天气图标：<p title="8小时后整点天气图标"><i class="qi-{{ data.a2h_icon }}"></i></p><br>
+10小时后整点天气图标：<p title="10小时后整点天气图标"><i class="qi-{{ data.a2h_icon }}"></i></p><br>
+12小时后整点天气图标：<p title="12小时后整点天气图标"><i class="qi-{{ data.a2h_icon }}"></i></p><br>
+2小时后整点降水量：<p title="2小时后整点降水量">{{ data.a2h_precip }}</p><br>
+4小时后整点降水量：<p title="4小时后整点降水量">{{ data.a4h_precip }}</p><br>
+6小时后整点降水量：<p title="6小时后整点降水量">{{ data.a6h_precip }}</p><br>
+8小时后整点降水量：<p title="8小时后整点降水量">{{ data.a8h_precip }}</p><br>
+10小时后整点降水量：<p title="10小时后整点降水量">{{ data.a10h_precip }}</p><br>
+12小时后整点降水量：<p title="12小时后整点降水量">{{ data.a12h_precip }}</p><br>
+{% if weather_warnings.warning_exist == 0 %}
+    <p>无预警</p>
+{% else %}
+    <div style="background-color: {{ weather_warnings.severity_color }}">
+    预警颜色：<p title="预警颜色">{{ weather_warnings.level }}</p><br>
+预警代码：<p title="预警代码">{{ weather_warnings.type }}</p> <br>
+预警类别：<p title="预警类别">{{ weather_warnings.typeName }}</p><br>
+预警图标：<p title="预警图标"><i class="qi-{{ weather_warnings.type }}"></i></p>
+    </div>
+{% endif %}
+
+<script>
+    // 更新当前时间
+    function updateCurrentTime() {
+        var currentTime = new Date();
+        var minutes = currentTime.getMinutes();
+        var seconds = currentTime.getSeconds();
+
+        // 计算距离下一分钟的延迟时间
+        var delay = (60 - seconds) * 1000;
+
+        // 更新当前时间
+        var hours = currentTime.getHours();
+        var timeString = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
+        document.getElementById('current-time').innerHTML = timeString;
+
+        // 下一分钟时执行更新操作
+        setTimeout(updateCurrentTime, delay);
+    }
+
+    // 更新当前时间
+    updateCurrentTime();
+
+    // 获取当前日期
+    var options = {year: 'numeric', month: 'long', day: 'numeric'};
+    var currentDate = new Date().toLocaleDateString('zh-CN', options);
+
+    // 获取当前星期几
+    var currentWeekday = new Date().toLocaleDateString('zh-CN', {weekday: 'long'});
+
+    // 获取当前农历
+    var lunarString = Solar.fromYmd(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate()).getLunar();
+    function getHoursArr(cHour)
+    {
+        var hoursArr = [cHour, cHour + 2, cHour + 4, cHour + 6, cHour + 8, cHour + 10, cHour + 12];
+        var processedHoursArr = hoursArr.map(function(value) {
+        // 如果元素大于 24，则减去 24
+             if (value >= 24) {
+                return value - 24;
+             }
+            // 否则保持不变
+            return value;
+        });
+        return processedHoursArr;
+
+    }
+    var currentHourArr = getHoursArr(new Date().getHours());
+    //获取当前整点时间
+    // 显示当前日期、星期几和农历
+    document.getElementById('current-date').innerHTML = currentDate;
+    document.getElementById('current-weekday').innerHTML = currentWeekday;
+    document.getElementById('current-lunar').innerHTML = lunarString;
+    document.getElementById('current-hour').innerHTML = currentHourArr[0];
+    document.getElementById('2-hours-later').innerHTML = currentHourArr[1];
+    document.getElementById('4-hours-later').innerHTML = currentHourArr[2];
+    document.getElementById('6-hours-later').innerHTML = currentHourArr[3];
+    document.getElementById('8-hours-later').innerHTML = currentHourArr[4];
+    document.getElementById('10-hours-later').innerHTML = currentHourArr[5];
+    document.getElementById('12-hours-later').innerHTML = currentHourArr[6];
+
+</script>
+</body>
+</html>
