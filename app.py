@@ -1,6 +1,6 @@
 import requests
+from flask import Flask, render_template
 from lxml import etree
-from flask import Flask, render_template, jsonify
 
 app = Flask(__name__)
 
@@ -11,15 +11,30 @@ def index():
     # 彰武坐标  '122.54,42.37'
     # 深圳代码  '101280601'
     location = '122.54,42.37'
-    key = '5c00cf403a6b46d4b2f5f6ea984ea8d4&'
+    key = '5c00cf403a6b46d4b2f5f6ea984ea8d4'
     # 向url进行requests
     response = requests.get(url)
     html_content = response.text
     html_tree = etree.HTML(html_content)
 
-    # 获取当天天气情况描述
-    today_weather_text = html_tree.xpath('/html/body/div[3]/div[3]/div/div[1]/div/div/div[2]/text()')
-    today_weather_text = today_weather_text[0]
+    # 获（tou）取当天天气情况描述
+    today_weather_text = html_tree.xpath('/html/body/div[3]/div[3]/div/div[1]/div/div/div[2]/text()')[0]
+
+    #
+    # 获（tou）取当前天空颜色和背景图
+    current_weather_bg_steal = html_tree.xpath('/html/body/div[3]/div[3]/div/div[1]/div')
+    for element in current_weather_bg_steal:
+        # 获取元素的类名
+        current_weather_bg_class = element.attrib.get('class')
+        print(current_weather_bg_class)
+
+    # 偷不到背景图
+    # current_weather_bg_steal_inner = html_tree.xpath('/html/body/div[3]/div[3]/div/div[1]/div/div')
+    # for element in current_weather_bg_steal_inner:
+    #     # 获取元素的类名
+    #     current_weather_bg_class_inner = element.attrib.get('class')
+    #     print(current_weather_bg_class_inner)
+
     #
     # 使用api获取数据
     # 使用查询当前天气pai
@@ -40,6 +55,8 @@ def index():
     data = {
 
         'today_weather_text': today_weather_text,
+        'current_weather_bg_class': current_weather_bg_class,
+        # 'current_weather_bg_class_inner': current_weather_bg_class_inner,
         'now_icon': data_now['now']['icon'],
         'now_weather': data_now['now']['text'],
         'now_temp': data_now['now']['temp'],
@@ -73,7 +90,7 @@ def index():
         weather_warnings = {
             'warning_exist': 1,
             'severity_color': data_warning['warning'][0]['severityColor'],
-            'level' : data_warning['warning'][0]['level'],
+            'level': data_warning['warning'][0]['level'],
             'type': data_warning['warning'][0]['type'],
             'typeName': data_warning['warning'][0]['typeName']
 
