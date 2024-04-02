@@ -6,52 +6,57 @@
     <title>Title</title>
     <link href="../static/QWeather-Icons-1.6.0/font/qweather-icons.css" rel="stylesheet">
     <link href="../static/css/style-zh.css" rel="stylesheet">
-    <script src="../static/js/lunar.js"></script>
     <link rel="stylesheet" href="../static/css/style.css">
 </head>
 <body>
-<div class="my_background c-city-weather-current city-weather-cloudy" style="border-radius:0">
-    <div class="my-container">
-        <div class="my-square">
+<div class="" id="background" style="border-radius:unset">
+    <div class="main-container">
+        <div class="layout vertical" id="frame1">
             <p title="现在时间" id="current-time"></p>
             <p title="现在日期" id="current-date"></p>
             <p title="现在阴历" id="current-lunar"></p>
         </div>
-        <div class="my-square">
-            <div class="horizontal">
+        <div class="layout horizontal" id="frame2">
+            <div class="layout vertical" id="weather">
                 <div class="weather-icon">
-                    <i title="今日天气图标" class="qi-101" ></i>
+                    <i title="今日天气图标" class="qi-101"></i>
                 </div>
                 <div id="current-weather">
                     <p title="当前天气描述">多云</p><br>
                 </div>
             </div>
-            <div class="horizontal">
+            <div class="layout horizontal">
                 <p title="当天最低温度">4</p><br>
                 <p title="当前气温">9</p><br>
                 <p title="当天最高温度">17</p><br>
             </div>
         </div>
-        <div class="my-rectangle">
-
+        <div class="layout vertical" id="frame3">
+            <div id="current-hour"></div>
+            <div id="2-hours-later"></div>
+            <div id="4-hours-later"></div>
+            <div id="6-hours-later"></div>
+            <div id="8-hours-later"></div>
+            <div id="10-hours-later"></div>
+            <div id="12-hours-later"></div>
 
         </div>
     </div>
 </div>
+<script src="../static/js/lunar.js"></script>
 <script>
     // 更新当前时间
     function updateCurrentTime() {
-        var currentTime = new Date();
-        var minutes = currentTime.getMinutes();
-        var seconds = currentTime.getSeconds();
+        let currentTime = new Date();
+        let minutes = currentTime.getMinutes();
+        let seconds = currentTime.getSeconds();
 
         // 计算距离下一分钟的延迟时间
-        var delay = (60 - seconds) * 1000;
+        let delay = (60 - seconds) * 1000;
 
         // 更新当前时间
-        var hours = currentTime.getHours();
-        var timeString = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
-        document.getElementById('current-time').innerHTML = timeString;
+        let hours = currentTime.getHours();
+        document.getElementById('current-time').innerHTML = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
 
         // 下一分钟时执行更新操作
         setTimeout(updateCurrentTime, delay);
@@ -61,18 +66,18 @@
     updateCurrentTime();
 
     // 获取当前日期
-    var options = {year: 'numeric', month: 'long', day: 'numeric'};
-    var currentDate = new Date().toLocaleDateString('zh-CN', options);
+    let options = {year: 'numeric', month: 'long', day: 'numeric'};
+    let currentDate = new Date().toLocaleDateString('zh-CN', options);
 
     // 获取当前星期几
-    var currentWeekday = new Date().toLocaleDateString('zh-CN', {weekday: 'long'});
+    let currentWeekday = new Date().toLocaleDateString('zh-CN', {weekday: 'long'});
 
     // 获取当前农历
-    var lunarString = Solar.fromYmd(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate()).getLunar();
+    let lunarString = Solar.fromYmd(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate()).getLunar();
 
     function getHoursArr(cHour) {
-        var hoursArr = [cHour, cHour + 2, cHour + 4, cHour + 6, cHour + 8, cHour + 10, cHour + 12];
-        var processedHoursArr = hoursArr.map(function (value) {
+        let hoursArr = [cHour, cHour + 2, cHour + 4, cHour + 6, cHour + 8, cHour + 10, cHour + 12];
+        return hoursArr.map(function (value) {
             // 如果元素大于 24，则减去 24
             if (value >= 24) {
                 return value - 24;
@@ -80,11 +85,10 @@
             // 否则保持不变
             return value;
         });
-        return processedHoursArr;
 
     }
 
-    var currentHourArr = getHoursArr(new Date().getHours());
+    let currentHourArr = getHoursArr(new Date().getHours());
     //获取当前整点时间
     // 显示当前日期、星期几和农历
     document.getElementById('current-date').innerHTML = currentDate + " " + currentWeekday;
@@ -97,7 +101,12 @@
     document.getElementById('8-hours-later').innerHTML = currentHourArr[4];
     document.getElementById('10-hours-later').innerHTML = currentHourArr[5];
     document.getElementById('12-hours-later').innerHTML = currentHourArr[6];
+    //c-city-weather-current city-weather-cloudy
+    if (!document.getElementById('background').style.backgroundImage) {
+        document.getElementById('background').style.backgroundColor = 'black';
+    }
 
+    console.log(document.getElementById('background').style.backgroundImage)
 </script>
 </body>
 </html>

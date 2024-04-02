@@ -1,24 +1,25 @@
-*{
+* {
     box-sizing: border-box;
 }
+
 body, html {
-    overflow-y:hidden;
-    overflow-x:hidden;
+    overflow-y: hidden;
+    overflow-x: hidden;
     margin: 0;
     padding: 0;
     width: 1920px;
     height: 480px;
 }
 
-.my-background {
+#background {
     width: 100%;
     height: 100%;
-    background: #222;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.my-container {
+
+.main-container {
     display: flex;
     align-items: center;
     width: 100%;
@@ -27,72 +28,85 @@ body, html {
     box-sizing: border-box;
 }
 
-.my-square, .my-rectangle {
+.layout {
     margin: 10px;
-    border-radius: 15px;
-    box-sizing: border-box;
-}
-.my-square {
-    margin: 10px;
-    border-radius: 15px;
     padding: 20px;
+    border-radius: 15px;
     box-sizing: border-box;
     background-color: #333; /* 添加背景颜色 */
     color: white; /* 设置文字颜色 */
     font-family: Arial, sans-serif; /* 设置字体 */
     text-align: center; /* 文字居中 */
-
-  line-height: 100%/* 适当的行高值 */; /* 或者 */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.my-square > * {
-  margin: 0 auto;
 }
 
-.my-square p {
-    margin: 10px 0; /* 调整段落之间的间距 */
-    font-size: 18px; /* 设置字体大小 */
-    line-height: 1.5; /* 设置行高 */
-    font-weight: bold; /* 奇数段落加粗 */
+.vertical {
+
 }
 
-.my-square {
+.horizontal {
+
+}
+
+/*以下为单个元素的样式*/
+#frame1 {
     height: 440px;
     width: 440px;
     background-color: #333;
+
 }
 
-.my-rectangle {
-    height: 440px;
-    width: 960px;
-    background-color: #444;
+#frame1 p {
+    margin: 10px 0; /* 调整段落之间的间距 */
+    font-size: 18px; /* 设置字体大小 */
+    line-height: 1.5; /* 设置行高 */
 }
-/*以下为单个元素的样式*/
-#current-time{
+
+#frame2 {
+    height: 440px;
+    width: 440px;
+    background-color: #333;
+
+}
+
+#frame3 {
+    height: 440px;
+    width: 440px;
+    background-color: #333;
+
+}
+
+#current-time {
     font-size: 140px;
 
 }
-#current-date{
+
+#current-date {
     font-size: 30px;
 }
-#current-lunar{
+
+#current-lunar {
     font-size: 20px;
 }
+
 .weather-icon {
 
 }
+
 #current-weather {
-  align-self: flex-start;
+    align-self: flex-start;
 }
 
-.my-square .weather-icon i{
+.square .weather-icon i {
     font-size: 150px;
     line-height: unset;
     text-align: unset;
 
 }
-.horizontal{
+
+.vertical {
+
+}
+
+.horizontal {
     float: left;
 }
