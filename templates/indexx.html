@@ -4,34 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Title</title>
-    <link href="/static/QWeather-Icons-1.6.0/font/qweather-icons.css" rel="stylesheet">
-    <link href="/static/css/style-zh.css" rel="stylesheet">
-    <script src="/static/js/lunar.js"></script>
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="../static/QWeather-Icons-1.6.0/font/qweather-icons.css" rel="stylesheet">
+    <link href="../static/css/style-zh.css" rel="stylesheet">
+    <script src="../static/js/lunar.js"></script>
+    <link rel="stylesheet" href="../static/css/style.css">
 </head>
 <body>
-<div class="my_background {{ data.current_weather_bg_class }}" style="border-radius:0">
+<div class="my_background c-city-weather-current city-weather-cloudy" style="border-radius:0">
     <div class="my-container">
         <div class="my-square">
             <p title="现在时间" id="current-time"></p>
-            <p title="现在日期" id="current-date">
-                <div id="current-date"></div>
-                <div id="current-weekday"></div>
-            </p>
-            <p title="现在星期" id="current-weekday"></p>
+            <p title="现在日期" id="current-date"></p>
             <p title="现在阴历" id="current-lunar"></p>
         </div>
         <div class="my-square">
-            <div class="weather-icon">
-                <p title="今日天气图标"><i class="qi-{{ data.now_icon }}" style="font-size:130px"></i></p>
+            <div class="horizontal">
+                <div class="weather-icon">
+                    <i title="今日天气图标" class="qi-101" ></i>
+                </div>
+                <div id="current-weather">
+                    <p title="当前天气描述">多云</p><br>
+                </div>
             </div>
-            <div id="current-weather">
-                <p title="当前天气描述">{{ data.now_weather }}</p><br>
-            </div>
-            <div id="today-temp">
-                <p title="当天最低温度">{{ data.today_lowest_temp }}</p><br>
-                <p title="当前气温">{{ data.now_temp }}</p><br>
-                <p title="当天最高温度">{{ data.today_highest_temp }}</p><br>
+            <div class="horizontal">
+                <p title="当天最低温度">4</p><br>
+                <p title="当前气温">9</p><br>
+                <p title="当天最高温度">17</p><br>
             </div>
         </div>
         <div class="my-rectangle">
@@ -89,7 +87,7 @@
     var currentHourArr = getHoursArr(new Date().getHours());
     //获取当前整点时间
     // 显示当前日期、星期几和农历
-    document.getElementById('current-date').innerHTML =  currentDate + " " + currentWeekday;
+    document.getElementById('current-date').innerHTML = currentDate + " " + currentWeekday;
     //document.getElementById('current-weekday').innerHTML = currentWeekday;
     document.getElementById('current-lunar').innerHTML = lunarString;
     document.getElementById('current-hour').innerHTML = currentHourArr[0];

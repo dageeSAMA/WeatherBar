@@ -41,17 +41,23 @@ body, html {
     color: white; /* 设置文字颜色 */
     font-family: Arial, sans-serif; /* 设置字体 */
     text-align: center; /* 文字居中 */
+
+  line-height: 100%/* 适当的行高值 */; /* 或者 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.my-square > * {
+  margin: 0 auto;
 }
 
 .my-square p {
     margin: 10px 0; /* 调整段落之间的间距 */
     font-size: 18px; /* 设置字体大小 */
     line-height: 1.5; /* 设置行高 */
-}
-
-.my-square p:nth-child(odd) {
     font-weight: bold; /* 奇数段落加粗 */
 }
+
 .my-square {
     height: 440px;
     width: 440px;
@@ -62,4 +68,31 @@ body, html {
     height: 440px;
     width: 960px;
     background-color: #444;
+}
+/*以下为单个元素的样式*/
+#current-time{
+    font-size: 140px;
+
+}
+#current-date{
+    font-size: 30px;
+}
+#current-lunar{
+    font-size: 20px;
+}
+.weather-icon {
+
+}
+#current-weather {
+  align-self: flex-start;
+}
+
+.my-square .weather-icon i{
+    font-size: 150px;
+    line-height: unset;
+    text-align: unset;
+
+}
+.horizontal{
+    float: left;
 }
