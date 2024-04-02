@@ -6,11 +6,11 @@
     <title>Title</title>
     <link href="../static/QWeather-Icons-1.6.0/font/qweather-icons.css" rel="stylesheet">
     <link href="../static/css/style-zh.css" rel="stylesheet">
-    <link rel="stylesheet" href="../static/css/style.css">
+    <link href="../static/css/style.css" rel="stylesheet">
 </head>
-<body>
-<div class="" id="background" style="border-radius:unset">
-    <div class="main-container">
+<body class="theme--dark">
+<div class="c-weather-current city-weather-cloudy" id="background" style="border-radius:unset">
+    <div class="main-container current-weather__bg">
         <div class="layout vertical" id="frame1">
             <p title="现在时间" id="current-time"></p>
             <p title="现在日期" id="current-date"></p>
@@ -101,9 +101,10 @@
     document.getElementById('8-hours-later').innerHTML = currentHourArr[4];
     document.getElementById('10-hours-later').innerHTML = currentHourArr[5];
     document.getElementById('12-hours-later').innerHTML = currentHourArr[6];
-    //c-city-weather-current city-weather-cloudy
-    if (!document.getElementById('background').style.backgroundImage) {
-        document.getElementById('background').style.backgroundColor = 'black';
+
+    let backgroundStyle = document.getElementById('background').style;
+    if (!backgroundStyle.backgroundImage) {
+        backgroundStyle.backgroundColor = 'black';
     }
 
     console.log(document.getElementById('background').style.backgroundImage)

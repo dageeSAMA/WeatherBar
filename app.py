@@ -1,6 +1,7 @@
 import requests
 from flask import Flask, render_template
 from lxml import etree
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -36,6 +37,28 @@ def index():
     #     print(current_weather_bg_class_inner)
 
     #
+    # 获取当前日出日落时间并与当前时间进行比较
+
+    def check_time_period():
+        # 获取当前日期
+        today_date = datetime.now().date()
+
+        # 设定日出和日落时间
+        sunrise_time = datetime.combine(today_date, datetime.strptime("05:30", "%H:%M").time())
+        sunset_time = datetime.combine(today_date, datetime.strptime("18:30", "%H:%M").time())
+
+        # 获取当前时间
+        current_time = datetime.now()
+
+        # 比较当前时间与日出时间和日落时间
+        if current_time < sunrise_time:
+            return "dark"
+        elif sunrise_time <= current_time <= sunset_time:
+            return "light"
+        else:
+            return "dark"
+
+    check_time_period()
     # 使用api获取数据
     # 使用查询当前天气pai
     response_for_now = requests.get('https://devapi.qweather.com/v7/weather/now?key=' + key + '&location=' + location)
@@ -53,7 +76,7 @@ def index():
     data_warning = response_for_warning.json()
     # 传参
     data = {
-
+        'theme': check_time_period(),
         'today_weather_text': today_weather_text,
         'current_weather_bg_class': current_weather_bg_class,
         # 'current_weather_bg_class_inner': current_weather_bg_class_inner,
