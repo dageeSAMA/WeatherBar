@@ -9,8 +9,8 @@
     <link href="../static/css/style.css" rel="stylesheet">
 </head>
 <body class="theme--dark">
-<div class="c-weather-current city-weather-cloudy" id="background" style="border-radius:unset">
-    <div class="main-container current-weather__bg">
+<div class="c-weather-current city-weather-cloudy" id="background">
+    <div class="main-container">
         <div class="layout vertical" id="frame1">
             <p title="现在时间" id="current-time"></p>
             <p title="现在日期" id="current-date"></p>
@@ -25,21 +25,47 @@
                     <p title="当前天气描述">多云</p><br>
                 </div>
             </div>
-            <div class="layout horizontal">
+            <div class="temperature-bar"></div>
+            <div class="layout vertical">
                 <p title="当天最低温度">4</p><br>
                 <p title="当前气温">9</p><br>
                 <p title="当天最高温度">17</p><br>
             </div>
         </div>
-        <div class="layout vertical" id="frame3">
-            <div id="current-hour"></div>
-            <div id="2-hours-later"></div>
-            <div id="4-hours-later"></div>
-            <div id="6-hours-later"></div>
-            <div id="8-hours-later"></div>
-            <div id="10-hours-later"></div>
-            <div id="12-hours-later"></div>
-
+        <div class="layout vertical current-weather__bg" id="frame3">
+            <div class="layout horizontal next-12-hours">
+                <div id="current-hour"></div>
+                <div id="2-hours-later"></div>
+                <div id="4-hours-later"></div>
+                <div id="6-hours-later"></div>
+                <div id="8-hours-later"></div>
+                <div id="10-hours-later"></div>
+                <div id="12-hours-later"></div>
+            </div>
+            <div class="chart">
+                <div class="node" style="height: 100px;"></div>
+                <div class="node" style="height: 120px;"></div>
+                <div class="node" style="height: 90px;"></div>
+                <div class="node" style="height: 110px;"></div>
+                <div class="node" style="height: 80px;"></div>
+                <div class="node" style="height: 130px;"></div>
+                <div class="node" style="height: 105px;"></div>
+            </div>
+            <div class="line">
+                <svg>
+                    <defs>
+                        <marker id="dot" markerWidth="8" markerHeight="8" refX="4" refY="4">
+                            <circle cx="4" cy="4" r="2.5"></circle>
+                        </marker>
+                    </defs>
+                    <line x1="0" y1="0%" x2="14.2857%" y2="100%"></line>
+                    <line x1="14.2857%" y1="100%" x2="28.5714%" y2="25%"></line>
+                    <line x1="28.5714%" y1="25%" x2="42.8571%" y2="80%"></line>
+                    <line x1="42.8571%" y1="80%" x2="57.1428%" y2="75%"></line>
+                    <line x1="57.1428%" y1="75%" x2="71.4286%" y2="90%"></line>
+                    <line x1="71.4286%" y1="90%" x2="85.7143%" y2="20%"></line>
+                </svg>
+            </div>
         </div>
     </div>
 </div>
@@ -94,13 +120,13 @@
     document.getElementById('current-date').innerHTML = currentDate + " " + currentWeekday;
     //document.getElementById('current-weekday').innerHTML = currentWeekday;
     document.getElementById('current-lunar').innerHTML = lunarString;
-    document.getElementById('current-hour').innerHTML = currentHourArr[0];
-    document.getElementById('2-hours-later').innerHTML = currentHourArr[1];
-    document.getElementById('4-hours-later').innerHTML = currentHourArr[2];
-    document.getElementById('6-hours-later').innerHTML = currentHourArr[3];
-    document.getElementById('8-hours-later').innerHTML = currentHourArr[4];
-    document.getElementById('10-hours-later').innerHTML = currentHourArr[5];
-    document.getElementById('12-hours-later').innerHTML = currentHourArr[6];
+    document.getElementById('current-hour').innerHTML = currentHourArr[0] + ":00";
+    document.getElementById('2-hours-later').innerHTML = currentHourArr[1] + ":00";
+    document.getElementById('4-hours-later').innerHTML = currentHourArr[2] + ":00";
+    document.getElementById('6-hours-later').innerHTML = currentHourArr[3] + ":00";
+    document.getElementById('8-hours-later').innerHTML = currentHourArr[4] + ":00";
+    document.getElementById('10-hours-later').innerHTML = currentHourArr[5] + ":00";
+    document.getElementById('12-hours-later').innerHTML = currentHourArr[6] + ":00";
 
     let backgroundStyle = document.getElementById('background').style;
     if (!backgroundStyle.backgroundImage) {

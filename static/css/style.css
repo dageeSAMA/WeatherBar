@@ -14,6 +14,7 @@ body, html {
 #background {
     width: 100%;
     height: 100%;
+    border-radius: unset;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,8 +27,7 @@ body, html {
     height: 100%;
     padding: 10px;
     box-sizing: border-box;
-    background-position: left top;
-    background-repeat: no-repeat;
+
 }
 
 .layout {
@@ -35,17 +35,19 @@ body, html {
     padding: 20px;
     border-radius: 15px;
     box-sizing: border-box;
-    background-color: #333; /* 添加背景颜色 */
     color: white; /* 设置文字颜色 */
     font-family: Arial, sans-serif; /* 设置字体 */
     text-align: center; /* 文字居中 */
 }
 
 .vertical {
-
+    display: flex;
+    flex-direction: column;
 }
 
 .horizontal {
+    display: flex;
+    flex-direction: row;
 
 }
 
@@ -54,31 +56,40 @@ body, html {
     height: 440px;
     width: 440px;
     background-color: #333;
-
 }
 
 #frame1 p {
-    margin: 10px 0; /* 调整段落之间的间距 */
-    font-size: 18px; /* 设置字体大小 */
-    line-height: 1.5; /* 设置行高 */
+    margin: 10px 0;
+    line-height: 1.5;
 }
 
 #frame2 {
     height: 440px;
     width: 440px;
     background-color: #333;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#frame2 .weather-icon i {
+    font-size: 150px;
+    line-height: unset;
+    text-align: unset;
 
 }
 
 #frame3 {
     height: 440px;
-    width: 440px;
+    flex-grow: 1;
     background-color: #333;
+    background-position: right top;
+    background-repeat: no-repeat;
 
 }
 
 #current-time {
-    font-size: 140px;
+    font-size: 135px;
 
 }
 
@@ -95,20 +106,50 @@ body, html {
 }
 
 #current-weather {
-    align-self: flex-start;
+    margin: 10px 0;
+    text-align: center;
 }
 
-.square .weather-icon i {
-    font-size: 150px;
-    line-height: unset;
-    text-align: unset;
-
+.temperature-bar {
+    width: 5px;
+    height: 150px;
+    background: linear-gradient(to bottom, #FF4500, #427BFF);
 }
 
-.vertical {
-
+.next-12-hours{
+    justify-content: space-around;
 }
 
-.horizontal {
-    float: left;
+.chart {
+    justify-content: space-around;
+    display: flex;
+}
+
+.node {
+    width: 20px;
+    background-color: #28caff;
+    margin-right: 10px;
+}
+
+.line {
+}
+.line svg {
+  width: 100%;
+  height: 100%;
+  color: white;
+  stroke: currentColor;
+  stroke-width: 1;
+  overflow: visible;
+  transform: scaleY(-1);
+}
+circle {
+  stroke: currentColor;
+  stroke-width: 1;
+  fill: red;
+}
+.line line {
+  marker-start: url(#dot)
+}
+.line line:last-child {
+  marker-end: url(#dot)
 }
