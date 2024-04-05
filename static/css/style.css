@@ -2,6 +2,7 @@
     box-sizing: border-box;
 }
 p{
+    font-size: 20px;
     padding: 5px;
 }
 body, html {
@@ -127,7 +128,9 @@ body, html {
     background-image: url("../images/temp_bar_bg.png");
     background-repeat: repeat-x;
 }
-
+.weather-forecast{
+    margin: 0 20px;
+}
 .next-12-hours{
     justify-content: space-around;
 }
@@ -141,6 +144,9 @@ body, html {
     margin: 0;
     height: 130px;
     justify-content: flex-end;
+}
+.temp-forecast p{
+    font-size: 20px;
 }
 .temp-node{
     width: 5px;
