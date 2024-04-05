@@ -1,7 +1,9 @@
 * {
     box-sizing: border-box;
 }
-
+p{
+    padding: 5px;
+}
 body, html {
     overflow-y: hidden;
     overflow-x: hidden;
@@ -31,8 +33,8 @@ body, html {
 }
 
 .layout {
-    margin: 10px;
-    padding: 20px;
+    margin: 5px;
+    padding: 5px;
     border-radius: 15px;
     box-sizing: border-box;
     color: white; /* 设置文字颜色 */
@@ -43,11 +45,18 @@ body, html {
 .vertical {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.vertical p{
+    text-align:  center;
 }
 
 .horizontal {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
 
 }
 
@@ -110,46 +119,59 @@ body, html {
     text-align: center;
 }
 
-.temperature-bar {
+#temperature-bar {
     width: 5px;
-    height: 150px;
-    background: linear-gradient(to bottom, #FF4500, #427BFF);
+    height: 200px;
+    /*background: linear-gradient(to bottom, #FF4500, #427BFF);*/
+    border-radius: 3px;
+    background-image: url("../images/temp_bar_bg.png");
+    background-repeat: repeat-x;
 }
 
 .next-12-hours{
     justify-content: space-around;
 }
-
-.chart {
-    justify-content: space-around;
+.next-12-hours p{
+    width: 70px;
+    height: 30px;
+    display: block;
+}
+.temp-forecast{
     display: flex;
+    margin: 0;
+    height: 130px;
+    justify-content: flex-end;
 }
+.temp-node{
+    width: 5px;
+    border-radius: 3px;
+    background-image: url("../images/temp_bar_bg.png");
+    background-repeat: repeat-x;
+}
+.next-hours-text{
+    margin: 10px 0;
+    width: 70px;
+    border: #777777 solid 10px;
+    border-radius: 10px;
+    display: block;
+    background-clip: padding-box;
+    background-color: #777777;
 
-.node {
+}
+.precip-forecast{
+    display: flex;
+    margin: 0;
+    height: 110px;
+    justify-content: flex-start;
+
+}
+.precip-node {
     width: 20px;
-    background-color: #28caff;
-    margin-right: 10px;
+    background-color: #30879C;
 }
-
-.line {
+#frame3 i{
+    font-size: 30px;
 }
-.line svg {
-  width: 100%;
-  height: 100%;
-  color: white;
-  stroke: currentColor;
-  stroke-width: 1;
-  overflow: visible;
-  transform: scaleY(-1);
-}
-circle {
-  stroke: currentColor;
-  stroke-width: 1;
-  fill: red;
-}
-.line line {
-  marker-start: url(#dot)
-}
-.line line:last-child {
-  marker-end: url(#dot)
+#weather-snapshot{
+    font-size: 20px;
 }

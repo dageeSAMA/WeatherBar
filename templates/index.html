@@ -4,102 +4,155 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Title</title>
-    <link href="/static/QWeather-Icons-1.6.0/font/qweather-icons.css" rel="stylesheet">
-    <link href="/static/css/style-zh.css" rel="stylesheet">
-    <script src="/static/js/lunar.js"></script>
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="../static/QWeather-Icons-1.6.0/font/qweather-icons.css" rel="stylesheet">
+    <link href="../static/css/style-zh.css" rel="stylesheet">
+    <link href="../static/css/style.css" rel="stylesheet">
+    <script src="../static/js/lunar.js"></script>
 </head>
 <body class="theme--{{ data.theme }}">
-<div class="my_background {{ data.current_weather_bg_class }}" style="border-radius:0">
-    <div class="container">
-        <div class="square">
+<div class="c-weather-current city-weather-cloudy" id="background">
+    <div class="main-container">
+        <div class="layout vertical" id="frame1">
             <p title="现在时间" id="current-time"></p>
-            <p title="现在日期" id="current-date">
-                <div id="current-date"></div>
-                <div id="current-weekday"></div>
-            </p>
-            <p title="现在星期" id="current-weekday"></p>
+            <p title="现在日期" id="current-date"></p>
             <p title="现在阴历" id="current-lunar"></p>
         </div>
-        <div class="square">
-            <div class="weather-icon">
-                <p title="今日天气图标"><i class="qi-{{ data.now_icon }}" style="font-size:130px"></i></p>
+        <div class="layout vertical" id="frame2">
+            <div class="layout horizontal">
+                <div class="layout vertical" id="weather">
+                    <div class="weather-icon">
+                        <i title="今日天气图标" class="qi-{{ data.now_icon }}"></i>
+                    </div>
+                    <div id="current-weather">
+                        <p title="当前天气描述">{{ data.now_weather }}</p><br>
+                    </div>
+                </div>
+                <div class="layout vertical" style="height: 200px;justify-content: space-between">
+                    <p title="当天最高温度">最高气温</p>
+                    <p title="当前气温">当前温度</p>
+                    <p title="当天最低温度">最低气温</p>
+                </div>
+                <div id="temperature-bar"></div>
+                <div class="layout vertical" style="height: 200px;justify-content: space-between">
+                    <p title="当天最高温度" id="today-highest-temp">{{ data.today_highest_temp }}℃</p>
+                    <p title="当前气温">{{ data.now_temp }}℃</p>
+                    <p title="当天最低温度" id="today-lowest-temp">{{ data.today_lowest_temp }}℃</p>
+
+                </div>
             </div>
-            <div id="current-weather">
-                <p title="当前天气描述">{{ data.now_weather }}</p><br>
-            </div>
-            <div id="today-temp">
-                <p title="当天最低温度">{{ data.today_lowest_temp }}</p><br>
-                <p title="当前气温">{{ data.now_temp }}</p><br>
-                <p title="当天最高温度">{{ data.today_highest_temp }}</p><br>
-            </div>
+
         </div>
-        <div class="rectangle">
+        <div class="layout vertical current-weather__bg" id="frame3">
+
+            <div class="layout horizontal next-12-hours">
+                <div class="layout vertical weather-forecast">
+                    <div class="temp-forecast vertical">
+                        <p class="temp-text">{{ data.a1h_temp }}℃</p>
+                        <div class="temp-node" style="height: 100%;"></div>
+                    </div>
+                    <div class="next-hours-text" id="1-hours-later"></div>
+                    <div class="precip-forecast vertical">
+                        <div class="precip-node" style="height: 100%;"></div>
+                        <p class="precip-text">{{ data.a1h_precip }}mm</p>
+                    </div>
+                    <div class="weather-icon">
+                        <i class="qi-{{ data.a1h_icon }}"></i>
+                    </div>
+                </div>
+                <div class="layout vertical weather-forecast">
+                    <div class="temp-forecast vertical">
+                        <p class="temp-text">{{ data.a3h_temp }}℃</p>
+                        <div class="temp-node" style="height: 15%;"></div>
+                    </div>
+                    <div class="next-hours-text" id="3-hours-later"></div>
+                    <div class="precip-forecast vertical">
+                        <div class="precip-node" style="height: 10%;"></div>
+                        <p class="precip-text">{{ data.a3h_precip }}mm</p>
+                    </div>
+                    <div class="weather-icon">
+                        <i class="qi-{{ data.a3h_icon }}"></i>
+                    </div>
+                </div>
+                <div class="layout vertical weather-forecast">
+                    <div class="temp-forecast vertical">
+                        <p class="temp-text">{{ data.a5h_temp }}℃</p>
+                        <div class="temp-node" style="height: 40%;"></div>
+                    </div>
+                    <div class="next-hours-text" id="5-hours-later"></div>
+                    <div class="precip-forecast vertical">
+                        <div class="precip-node" style="height: 10%;"></div>
+                        <p class="precip-text">{{ data.a5h_precip }}mm</p>
+                    </div>
+                    <div class="weather-icon">
+                        <i class="qi-{{ data.a5h_icon }}"></i>
+                    </div>
+                </div>
+                <div class="layout vertical weather-forecast">
+                    <div class="temp-forecast vertical">
+                        <p class="temp-text">{{ data.a7h_temp }}℃</p>
+                        <div class="temp-node" style="height: 90%;"></div>
+                    </div>
+                    <div class="next-hours-text" id="7-hours-later"></div>
+                    <div class="precip-forecast vertical">
+                        <div class="precip-node" style="height: 00%;"></div>
+                        <p class="precip-text">{{ data.a7h_precip }}mm</p>
+                    </div>
+                    <div class="weather-icon">
+                        <i class="qi-{{ data.a7h_icon }}"></i>
+                    </div>
+                </div>
+                <div class="layout vertical weather-forecast">
+                    <div class="temp-forecast vertical">
+                        <p class="temp-text">{{ data.a9h_temp }}℃</p>
+                        <div class="temp-node" style="height: 40%;"></div>
+                    </div>
+                    <div class="next-hours-text" id="9-hours-later"></div>
+                    <div class="precip-forecast vertical">
+                        <div class="precip-node" style="height: 40%;"></div>
+                        <p class="precip-text">{{ data.a9h_precip }}mm</p>
+                    </div>
+                    <div class="weather-icon">
+                        <i class="qi-{{ data.a9h_icon }}"></i>
+                    </div>
+                </div>
+                <div class="layout vertical weather-forecast">
+                    <div class="temp-forecast vertical">
+                        <p class="temp-text">{{ data.a11h_temp }}℃</p>
+                        <div class="temp-node" style="height: 40%;"></div>
+                    </div>
+                    <div class="next-hours-text" id="11-hours-later"></div>
+                    <div class="precip-forecast vertical">
+                        <div class="precip-node" style="height: 20%;"></div>
+                        <p class="precip-text">{{ data.a11h_precip }}mm</p>
+                    </div>
+                    <div class="weather-icon">
+                        <i class="qi-{{ data.a11h_icon }}"></i>
+                    </div>
+                </div>
+                <div class="layout vertical weather-forecast">
+                    <div class="temp-forecast vertical">
+                        <p class="temp-text">{{ data.a13h_temp }}℃</p>
+                        <div class="temp-node" style="height: 40%;"></div>
+                    </div>
+                    <div class="next-hours-text" id="13-hours-later"></div>
+                    <div class="precip-forecast vertical">
+                        <div class="precip-node" style="height: 20%;"></div>
+                        <p class="precip-text">{{ data.a13h_precip }}mm</p>
+                    </div>
+                    <div class="weather-icon">
+                        <i class="qi-{{ data.a13h_icon }}"></i>
+                    </div>
+                </div>
+            </div>
 
 
+            <div id="weather-snapshot">
+                <p>{{ data.today_weather_text }}</p>
+            </div>
         </div>
     </div>
 </div>
-<script>
-    // 更新当前时间
-    function updateCurrentTime() {
-        var currentTime = new Date();
-        var minutes = currentTime.getMinutes();
-        var seconds = currentTime.getSeconds();
-
-        // 计算距离下一分钟的延迟时间
-        var delay = (60 - seconds) * 1000;
-
-        // 更新当前时间
-        var hours = currentTime.getHours();
-        var timeString = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
-        document.getElementById('current-time').innerHTML = timeString;
-
-        // 下一分钟时执行更新操作
-        setTimeout(updateCurrentTime, delay);
-    }
-
-    // 更新当前时间
-    updateCurrentTime();
-
-    // 获取当前日期
-    var options = {year: 'numeric', month: 'long', day: 'numeric'};
-    var currentDate = new Date().toLocaleDateString('zh-CN', options);
-
-    // 获取当前星期几
-    var currentWeekday = new Date().toLocaleDateString('zh-CN', {weekday: 'long'});
-
-    // 获取当前农历
-    var lunarString = Solar.fromYmd(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate()).getLunar();
-
-    function getHoursArr(cHour) {
-        var hoursArr = [cHour, cHour + 2, cHour + 4, cHour + 6, cHour + 8, cHour + 10, cHour + 12];
-        var processedHoursArr = hoursArr.map(function (value) {
-            // 如果元素大于 24，则减去 24
-            if (value >= 24) {
-                return value - 24;
-            }
-            // 否则保持不变
-            return value;
-        });
-        return processedHoursArr;
-
-    }
-
-    var currentHourArr = getHoursArr(new Date().getHours());
-    //获取当前整点时间
-    // 显示当前日期、星期几和农历
-    document.getElementById('current-date').innerHTML =  currentDate + " " + currentWeekday;
-    //document.getElementById('current-weekday').innerHTML = currentWeekday;
-    document.getElementById('current-lunar').innerHTML = lunarString;
-    document.getElementById('current-hour').innerHTML = currentHourArr[0];
-    document.getElementById('2-hours-later').innerHTML = currentHourArr[1];
-    document.getElementById('4-hours-later').innerHTML = currentHourArr[2];
-    document.getElementById('6-hours-later').innerHTML = currentHourArr[3];
-    document.getElementById('8-hours-later').innerHTML = currentHourArr[4];
-    document.getElementById('10-hours-later').innerHTML = currentHourArr[5];
-    document.getElementById('12-hours-later').innerHTML = currentHourArr[6];
-
-</script>
 </body>
+
+<script src="../static/js/loaded.js"></script>
 </html>

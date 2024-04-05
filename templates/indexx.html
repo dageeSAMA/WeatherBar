@@ -7,8 +7,9 @@
     <link href="../static/QWeather-Icons-1.6.0/font/qweather-icons.css" rel="stylesheet">
     <link href="../static/css/style-zh.css" rel="stylesheet">
     <link href="../static/css/style.css" rel="stylesheet">
+    <script src="../static/js/lunar.js"></script>
 </head>
-<body class="theme--dark">
+<body class="theme--light">
 <div class="c-weather-current city-weather-cloudy" id="background">
     <div class="main-container">
         <div class="layout vertical" id="frame1">
@@ -16,124 +17,142 @@
             <p title="现在日期" id="current-date"></p>
             <p title="现在阴历" id="current-lunar"></p>
         </div>
-        <div class="layout horizontal" id="frame2">
-            <div class="layout vertical" id="weather">
-                <div class="weather-icon">
-                    <i title="今日天气图标" class="qi-101"></i>
+        <div class="layout vertical" id="frame2">
+            <div class="layout horizontal">
+                <div class="layout vertical" id="weather">
+                    <div class="weather-icon">
+                        <i title="今日天气图标" class="qi-101"></i>
+                    </div>
+                    <div id="current-weather">
+                        <p title="当前天气描述">多云</p><br>
+                    </div>
                 </div>
-                <div id="current-weather">
-                    <p title="当前天气描述">多云</p><br>
+                <div class="layout vertical" style="height: 200px;justify-content: space-between">
+                    <p title="当天最高温度">最高气温</p>
+                    <p title="当前气温">当前温度</p>
+                    <p title="当天最低温度">最低气温</p>
+                </div>
+                <div id="temperature-bar"></div>
+                <div class="layout vertical" style="height: 200px;justify-content: space-between">
+                    <p title="当天最高温度" id="today-highest-temp">10℃</p>
+                    <p title="当前气温">3℃</p>
+                    <p title="当天最低温度" id="today-lowest-temp">0℃</p>
+
                 </div>
             </div>
-            <div class="temperature-bar"></div>
-            <div class="layout vertical">
-                <p title="当天最低温度">4</p><br>
-                <p title="当前气温">9</p><br>
-                <p title="当天最高温度">17</p><br>
-            </div>
+
         </div>
         <div class="layout vertical current-weather__bg" id="frame3">
+
             <div class="layout horizontal next-12-hours">
-                <div id="current-hour"></div>
-                <div id="2-hours-later"></div>
-                <div id="4-hours-later"></div>
-                <div id="6-hours-later"></div>
-                <div id="8-hours-later"></div>
-                <div id="10-hours-later"></div>
-                <div id="12-hours-later"></div>
+                <div class="layout vertical weather-forecast">
+                    <div class="temp-forecast vertical">
+                        <p class="temp-text">4℃</p>
+                        <div class="temp-node" style="height: 100%;"></div>
+                    </div>
+                    <div class="next-hours-text" id="1-hours-later"></div>
+                    <div class="precip-forecast vertical">
+                        <div class="precip-node" style="height: 100%;"></div>
+                        <p class="precip-text">0.0mm</p>
+                    </div>
+                    <div class="weather-icon">
+                        <i class="qi-103"></i>
+                    </div>
+                </div>
+                <div class="layout vertical weather-forecast">
+                    <div class="temp-forecast vertical">
+                        <p class="temp-text">6℃</p>
+                        <div class="temp-node" style="height: 15%;"></div>
+                    </div>
+                    <div class="next-hours-text" id="3-hours-later"></div>
+                    <div class="precip-forecast vertical">
+                        <div class="precip-node" style="height: 10%;"></div>
+                        <p class="precip-text">0.0mm</p>
+                    </div>
+                    <div class="weather-icon">
+                        <i class="qi-104"></i>
+                    </div>
+                </div>
+                <div class="layout vertical weather-forecast">
+                    <div class="temp-forecast vertical">
+                        <p class="temp-text">9℃</p>
+                        <div class="temp-node" style="height: 40%;"></div>
+                    </div>
+                    <div class="next-hours-text" id="5-hours-later"></div>
+                    <div class="precip-forecast vertical">
+                        <div class="precip-node" style="height: 10%;"></div>
+                        <p class="precip-text">0.0mm</p>
+                    </div>
+                    <div class="weather-icon">
+                        <i class="qi-104"></i>
+                    </div>
+                </div>
+                <div class="layout vertical weather-forecast">
+                    <div class="temp-forecast vertical">
+                        <p class="temp-text">7℃</p>
+                        <div class="temp-node" style="height: 90%;"></div>
+                    </div>
+                    <div class="next-hours-text" id="7-hours-later"></div>
+                    <div class="precip-forecast vertical">
+                        <div class="precip-node" style="height: 00%;"></div>
+                        <p class="precip-text">0.0mm</p>
+                    </div>
+                    <div class="weather-icon">
+                        <i class="qi-104-fill"></i>
+                    </div>
+                </div>
+                <div class="layout vertical weather-forecast">
+                    <div class="temp-forecast vertical">
+                        <p class="temp-text">-3℃</p>
+                        <div class="temp-node" style="height: 40%;"></div>
+                    </div>
+                    <div class="next-hours-text" id="9-hours-later"></div>
+                    <div class="precip-forecast vertical">
+                        <div class="precip-node" style="height: 40%;"></div>
+                        <p class="precip-text">0.0mm</p>
+                    </div>
+                    <div class="weather-icon">
+                        <i class="qi-104-fill"></i>
+                    </div>
+                </div>
+                <div class="layout vertical weather-forecast">
+                    <div class="temp-forecast vertical">
+                        <p class="temp-text">-2℃</p>
+                        <div class="temp-node" style="height: 40%;"></div>
+                    </div>
+                    <div class="next-hours-text" id="11-hours-later"></div>
+                    <div class="precip-forecast vertical">
+                        <div class="precip-node" style="height: 20%;"></div>
+                        <p class="precip-text">0.0mm</p>
+                    </div>
+                    <div class="weather-icon">
+                        <i class="qi-1021"></i>
+                    </div>
+                </div>
+                <div class="layout vertical weather-forecast">
+                    <div class="temp-forecast vertical">
+                        <p class="temp-text">7℃</p>
+                        <div class="temp-node" style="height: 40%;"></div>
+                    </div>
+                    <div class="next-hours-text" id="13-hours-later"></div>
+                    <div class="precip-forecast vertical">
+                        <div class="precip-node" style="height: 20%;"></div>
+                        <p class="precip-text">0.0mm</p>
+                    </div>
+                    <div class="weather-icon">
+                        <i class="qi-101"></i>
+                    </div>
+                </div>
             </div>
-            <div class="chart">
-                <div class="node" style="height: 100px;"></div>
-                <div class="node" style="height: 120px;"></div>
-                <div class="node" style="height: 90px;"></div>
-                <div class="node" style="height: 110px;"></div>
-                <div class="node" style="height: 80px;"></div>
-                <div class="node" style="height: 130px;"></div>
-                <div class="node" style="height: 105px;"></div>
-            </div>
-            <div class="line">
-                <svg>
-                    <defs>
-                        <marker id="dot" markerWidth="8" markerHeight="8" refX="4" refY="4">
-                            <circle cx="4" cy="4" r="2.5"></circle>
-                        </marker>
-                    </defs>
-                    <line x1="0" y1="0%" x2="14.2857%" y2="100%"></line>
-                    <line x1="14.2857%" y1="100%" x2="28.5714%" y2="25%"></line>
-                    <line x1="28.5714%" y1="25%" x2="42.8571%" y2="80%"></line>
-                    <line x1="42.8571%" y1="80%" x2="57.1428%" y2="75%"></line>
-                    <line x1="57.1428%" y1="75%" x2="71.4286%" y2="90%"></line>
-                    <line x1="71.4286%" y1="90%" x2="85.7143%" y2="20%"></line>
-                </svg>
+
+
+            <div id="weather-snapshot">
+                <p>今天天气一般，适合在家打上单</p>
             </div>
         </div>
+
     </div>
 </div>
-<script src="../static/js/lunar.js"></script>
-<script>
-    // 更新当前时间
-    function updateCurrentTime() {
-        let currentTime = new Date();
-        let minutes = currentTime.getMinutes();
-        let seconds = currentTime.getSeconds();
-
-        // 计算距离下一分钟的延迟时间
-        let delay = (60 - seconds) * 1000;
-
-        // 更新当前时间
-        let hours = currentTime.getHours();
-        document.getElementById('current-time').innerHTML = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
-
-        // 下一分钟时执行更新操作
-        setTimeout(updateCurrentTime, delay);
-    }
-
-    // 更新当前时间
-    updateCurrentTime();
-
-    // 获取当前日期
-    let options = {year: 'numeric', month: 'long', day: 'numeric'};
-    let currentDate = new Date().toLocaleDateString('zh-CN', options);
-
-    // 获取当前星期几
-    let currentWeekday = new Date().toLocaleDateString('zh-CN', {weekday: 'long'});
-
-    // 获取当前农历
-    let lunarString = Solar.fromYmd(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate()).getLunar();
-
-    function getHoursArr(cHour) {
-        let hoursArr = [cHour, cHour + 2, cHour + 4, cHour + 6, cHour + 8, cHour + 10, cHour + 12];
-        return hoursArr.map(function (value) {
-            // 如果元素大于 24，则减去 24
-            if (value >= 24) {
-                return value - 24;
-            }
-            // 否则保持不变
-            return value;
-        });
-
-    }
-
-    let currentHourArr = getHoursArr(new Date().getHours());
-    //获取当前整点时间
-    // 显示当前日期、星期几和农历
-    document.getElementById('current-date').innerHTML = currentDate + " " + currentWeekday;
-    //document.getElementById('current-weekday').innerHTML = currentWeekday;
-    document.getElementById('current-lunar').innerHTML = lunarString;
-    document.getElementById('current-hour').innerHTML = currentHourArr[0] + ":00";
-    document.getElementById('2-hours-later').innerHTML = currentHourArr[1] + ":00";
-    document.getElementById('4-hours-later').innerHTML = currentHourArr[2] + ":00";
-    document.getElementById('6-hours-later').innerHTML = currentHourArr[3] + ":00";
-    document.getElementById('8-hours-later').innerHTML = currentHourArr[4] + ":00";
-    document.getElementById('10-hours-later').innerHTML = currentHourArr[5] + ":00";
-    document.getElementById('12-hours-later').innerHTML = currentHourArr[6] + ":00";
-
-    let backgroundStyle = document.getElementById('background').style;
-    if (!backgroundStyle.backgroundImage) {
-        backgroundStyle.backgroundColor = 'black';
-    }
-
-    console.log(document.getElementById('background').style.backgroundImage)
-</script>
 </body>
+<script src="../static/js/loaded.js"></script>
 </html>
