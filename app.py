@@ -8,37 +8,48 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    url = 'https://www.qweather.com/weather/zhangwu-101070902.html'
+    location = '122.54,42.37'
+
     # 彰武坐标  '122.54,42.37'
     # 深圳代码  '101280601'
-    location = '122.54,42.37'
+    # 使用api获取数据
+
     key = '5c00cf403a6b46d4b2f5f6ea984ea8d4'
+    # 使用api查询位置坐标静态页
+    response_for_lookup = requests.get('https://geoapi.qweather.com/v2/city/lookup?key=' + key + '&location=' + location)
+    # 使用api查询当前天气
+    response_for_now = requests.get('https://devapi.qweather.com/v7/weather/now?key=' + key + '&location=' + location)
+    # 使用api查询24h天气
+    response_for_24h = requests.get('https://devapi.qweather.com/v7/weather/24h?key=' + key + '&location=' + location)
+    # 使用api查询3天预报
+    response_for_3days = requests.get('https://devapi.qweather.com/v7/weather/3d?key=' + key + '&location=' + location)
+    # 使用api查询预警
+    response_for_warning = requests.get(
+        'https://devapi.qweather.com/v7/warning/now?key=' + key + '&location=' + location)
+    data_lookup = response_for_lookup.json()
+    print(data_lookup)
+    url = data_lookup['location'][0]['fxLink']
+
+    # url = 'https://www.qweather.com/weather/zhangwu-101070902.html'
     # 向url进行requests
     response = requests.get(url)
     html_content = response.text
     html_tree = etree.HTML(html_content)
-
     # 获（tou）取当天天气情况描述
     today_weather_text = html_tree.xpath('/html/body/div[3]/div[3]/div/div[1]/div/div/div[2]/text()')[0]
-
     #
     # 获（tou）取当前天空颜色和背景图
     current_weather_bg_steal = html_tree.xpath('/html/body/div[3]/div[3]/div/div[1]/div')
     for element in current_weather_bg_steal:
-        # 获取元素的类名
+        # 获取背景所在元素的类名
         current_weather_bg_class = element.attrib.get('class')
-        print(current_weather_bg_class)
 
-    # 偷不到背景图
-    # current_weather_bg_steal_inner = html_tree.xpath('/html/body/div[3]/div[3]/div/div[1]/div/div')
-    # for element in current_weather_bg_steal_inner:
-    #     # 获取元素的类名
-    #     current_weather_bg_class_inner = element.attrib.get('class')
-    #     print(current_weather_bg_class_inner)
+    data_now = response_for_now.json()
+    data_24h = response_for_24h.json()
+    data_3days = response_for_3days.json()
+    data_warning = response_for_warning.json()
 
-    #
-    # 获取当前日出日落时间并与当前时间进行比较
-
+    # 传参
     def check_time_period():
         # 获取当前日期
         today_date = datetime.now().date()
@@ -58,28 +69,10 @@ def index():
         else:
             return "dark"
 
-    check_time_period()
-    # 使用api获取数据
-    # 使用查询当前天气pai
-    response_for_now = requests.get('https://devapi.qweather.com/v7/weather/now?key=' + key + '&location=' + location)
-    # 使用查询24h天气pai
-    response_for_24h = requests.get('https://devapi.qweather.com/v7/weather/24h?key=' + key + '&location=' + location)
-    # 使用查询3天预报api
-    response_for_3days = requests.get('https://devapi.qweather.com/v7/weather/3d?key=' + key + '&location=' + location)
-    # 使用查询预警api
-    response_for_warning = requests.get(
-        'https://devapi.qweather.com/v7/warning/now?key=' + key + '&location=' + location)
-
-    data_now = response_for_now.json()
-    data_24h = response_for_24h.json()
-    data_3days = response_for_3days.json()
-    data_warning = response_for_warning.json()
-    # 传参
     data = {
         'theme': check_time_period(),
         'today_weather_text': today_weather_text,
         'current_weather_bg_class': current_weather_bg_class,
-        # 'current_weather_bg_class_inner': current_weather_bg_class_inner,
         'now_icon': data_now['now']['icon'],
         'now_weather': data_now['now']['text'],
         'now_temp': data_now['now']['temp'],
@@ -108,6 +101,8 @@ def index():
         'a13h_precip': data_24h['hourly'][12]['precip'],
 
     }
+
+    check_time_period()
     if len(data_warning['warning']) == 0:
         weather_warnings = {
             'warning_exist': 0

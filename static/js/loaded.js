@@ -35,7 +35,7 @@ document.getElementById('current-lunar').innerHTML = lunarString;
 let todayHighestTemp = parseInt(document.getElementById("today-highest-temp").textContent.replace("℃", ""));
 let todayLowestTemp = parseInt(document.getElementById("today-lowest-temp").textContent.replace("℃", ""));
 let temperatureBar = document.getElementById("temperature-bar");
-//第一版方案
+// 1：缩放较小；2缩放较大
 const switchVersion = 2;
 let zoom,zoomValue,offsetValue;
 if (switchVersion === 1) {
@@ -112,7 +112,6 @@ let tempNode = document.getElementsByClassName("temp-node");
 // let precipNode = document.getElementsByClassName("precip-node");
 // let precipText = document.getElementsByClassName("precip-text");
 //let weatherForecastInfo = [];
-let zoomTini,zoomVaLueTini,offsetValueTini;
 for (let i = 0; i <= 6; i++) {
     // weatherForecastInfo[i] = {
     //     "tempNodeHeight": tempNode[i].getBoundingClientRect().height,
