@@ -41,7 +41,7 @@ let zoom,zoomValue,offsetValue;
 if (switchVersion === 1) {
     zoom = 200/500 * (100 / (todayHighestTemp - todayLowestTemp));
     zoomValue = 500/200 * 100 * zoom;
-    offsetValue = -(50 - todayHighestTemp) * 5 * zoom;
+    offsetValue = 500 * zoom *(todayHighestTemp - 50) /100*2;
 }
 if (switchVersion === 2) {
     zoom = 200/500 * (100 / (todayHighestTemp - todayLowestTemp)) / 2;
