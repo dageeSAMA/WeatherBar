@@ -47,7 +47,7 @@ if (switchVersion === 2) {
     zoom = 200/500 * (100 / (todayHighestTemp - todayLowestTemp)) / 2;
     zoomValue = 500/200 * 100 * zoom;
     // offsetValue = -(50 - todayHighestTemp - (todayHighestTemp - (todayHighestTemp + todayLowestTemp) / 2)) * 5 * zoom;
-    offsetValue = 500*zoom*((todayLowestTemp-50)/100);
+    offsetValue = -500*zoom*((todayLowestTemp-50)/100)-500*zoom;
     console.log("offsetValue:",offsetValue)
     console.log("zoom:",zoom)
 }

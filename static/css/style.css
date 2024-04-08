@@ -32,11 +32,18 @@ body, html {
     box-sizing: border-box;
 
 }
-
-.layout {
+.frame{
+    margin: 10px;
+    border-radius: 15px;
+    box-sizing: border-box;
+    color: white; /* 设置文字颜色 */
+    font-family: Arial, sans-serif; /* 设置字体 */
+    text-align: center; /* 文字居中 */
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+.layout p{
     margin: 5px;
     padding: 5px;
-    border-radius: 15px;
     box-sizing: border-box;
     color: white; /* 设置文字颜色 */
     font-family: Arial, sans-serif; /* 设置字体 */
@@ -81,7 +88,9 @@ body, html {
     align-items: center;
 
 }
-
+#location-name p{
+    font-size: 30px;
+}
 #frame2 .weather-icon i {
     font-size: 150px;
     line-height: unset;
@@ -179,5 +188,23 @@ body, html {
     font-size: 30px;
 }
 #weather-snapshot{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 45px;
+}
+#weather-snapshot p{
+    padding: unset;
     font-size: 20px;
+}
+#warning {
+    height: 60px;
+    width: 80%;
+    border-radius: 15px;
+
+}
+#warning p{
+
+    opacity: 1;
 }

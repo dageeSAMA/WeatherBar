@@ -12,12 +12,15 @@
 <body class="theme--light">
 <div class="c-weather-current city-weather-cloudy" id="background">
     <div class="main-container">
-        <div class="layout vertical" id="frame1">
+        <div class="frame vertical" id="frame1">
             <p title="现在时间" id="current-time"></p>
             <p title="现在日期" id="current-date"></p>
             <p title="现在阴历" id="current-lunar"></p>
         </div>
-        <div class="layout vertical" id="frame2">
+        <div class="frame vertical" id="frame2">
+            <div id="location-name">
+                <p>彰武</p>
+            </div>
             <div class="layout horizontal">
                 <div class="layout vertical" id="weather">
                     <div class="weather-icon">
@@ -27,6 +30,7 @@
                         <p title="当前天气描述">多云</p><br>
                     </div>
                 </div>
+                <div style="width: 20px"></div>
                 <div class="layout vertical" style="height: 200px;justify-content: space-between">
                     <p title="当天最高温度">最高气温</p>
                     <p title="当前气温">当前</p>
@@ -34,15 +38,18 @@
                 </div>
                 <div id="temperature-bar"></div>
                 <div class="layout vertical" style="height: 200px;justify-content: space-between">
-                    <p title="当天最高温度" id="today-highest-temp">10℃</p>
+                    <p title="当天最高温度" id="today-highest-temp">30℃</p>
                     <p title="当前气温">3℃</p>
-                    <p title="当天最低温度" id="today-lowest-temp">0℃</p>
+                    <p title="当天最低温度" id="today-lowest-temp">17℃</p>
 
                 </div>
             </div>
+            <div class="layout horizontal" id="warning" style="background-color: rgba(255, 255, 255, 0.5)">
+                <p>大风</p>
+            </div>
 
         </div>
-        <div class="layout vertical current-weather__bg" id="frame3">
+        <div class="frame vertical current-weather__bg" id="frame3">
 
             <div class="layout horizontal next-12-hours">
                 <div class="layout vertical weather-forecast">

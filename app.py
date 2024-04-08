@@ -16,7 +16,8 @@ def index():
 
     key = '5c00cf403a6b46d4b2f5f6ea984ea8d4'
     # 使用api查询位置坐标静态页
-    response_for_lookup = requests.get('https://geoapi.qweather.com/v2/city/lookup?key=' + key + '&location=' + location)
+    response_for_lookup = requests.get(
+        'https://geoapi.qweather.com/v2/city/lookup?key=' + key + '&location=' + location)
     # 使用api查询当前天气
     response_for_now = requests.get('https://devapi.qweather.com/v7/weather/now?key=' + key + '&location=' + location)
     # 使用api查询24h天气
@@ -27,7 +28,6 @@ def index():
     response_for_warning = requests.get(
         'https://devapi.qweather.com/v7/warning/now?key=' + key + '&location=' + location)
     data_lookup = response_for_lookup.json()
-    print(data_lookup)
     url = data_lookup['location'][0]['fxLink']
 
     # url = 'https://www.qweather.com/weather/zhangwu-101070902.html'
@@ -73,6 +73,7 @@ def index():
         'theme': check_time_period(),
         'today_weather_text': today_weather_text,
         'current_weather_bg_class': current_weather_bg_class,
+        'location_name': data_lookup['location'][0]['name'],
         'now_icon': data_now['now']['icon'],
         'now_weather': data_now['now']['text'],
         'now_temp': data_now['now']['temp'],
@@ -108,22 +109,32 @@ def index():
             'warning_exist': 0
         }
     else:
+        severity_color = data_warning['warning'][0]['severityColor']
+        if severity_color == "White":
+            severity_color = "rgba(255, 255, 255, 0.5)"
+        elif severity_color == "Blue":
+            severity_color = "rgba(100, 100, 255, 0.5)"
+        elif severity_color == "Green":
+            severity_color = "rgba(100, 255, 100, 0.5)"
+        elif severity_color == "Yellow":
+            severity_color = "rgba(255, 255, 100, 0.5)"
+        elif severity_color == "Orange":
+            severity_color = "rgba(255, 128, 100, 0.5)"
+        elif severity_color == "Red":
+            severity_color = "rgba(255, 100, 100, 0.5)"
+        elif severity_color == "Black":
+            severity_color = "rgba(0, 0, 0, 0)"
+
         weather_warnings = {
             'warning_exist': 1,
-            'severity_color': data_warning['warning'][0]['severityColor'],
+            'severity_color': severity_color,
             'level': data_warning['warning'][0]['level'],
             'type': data_warning['warning'][0]['type'],
-            'typeName': data_warning['warning'][0]['typeName']
+            'type_name': data_warning['warning'][0]['typeName']
 
         }
-
+    print(weather_warnings)
     return render_template("index.html", data=data, weather_warnings=weather_warnings)
-
-
-@app.after_request
-def add_security_headers(response):
-    response.headers['x-content-type-options'] = 'nosniff'
-    return response
 
 
 if __name__ == '__main__':
