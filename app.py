@@ -1,3 +1,4 @@
+import re
 import requests
 from flask import Flask, render_template, request
 from lxml import etree
@@ -21,6 +22,19 @@ def index():
     # 使用api查询位置坐标静态页
     response_for_lookup = requests.get(
         'https://geoapi.qweather.com/v2/city/lookup?key=' + key + '&location=' + location)
+
+    data_lookup = response_for_lookup.json()
+    if data_lookup['code'] != '200':
+        return "<h1>位置代码或信息输入错误</h1>"
+    url = data_lookup['location'][0]['fxLink']
+
+    # 处理fxLink以获得位置代码
+    match_location_code = re.search(r'-(\d+)\.', url)
+    if match_location_code:
+        location = match_location_code.group(1)
+        print("match_location_code", location)
+    else:
+        return "<h1>位置代码或信息输入错误</h1>"
     # 使用api查询当前天气
     response_for_now = requests.get('https://devapi.qweather.com/v7/weather/now?key=' + key + '&location=' + location)
     # 使用api查询24h天气
@@ -30,11 +44,6 @@ def index():
     # 使用api查询预警
     response_for_warning = requests.get(
         'https://devapi.qweather.com/v7/warning/now?key=' + key + '&location=' + location)
-    data_lookup = response_for_lookup.json()
-    print(data_lookup)
-    if data_lookup['code'] != '200':
-        return "<h1>位置代码或信息输入错误</h1>"
-    url = data_lookup['location'][0]['fxLink']
 
     # url = 'https://www.qweather.com/weather/zhangwu-101070902.html'
     # 向url进行requests
