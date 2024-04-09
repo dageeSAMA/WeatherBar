@@ -1,5 +1,5 @@
 import requests
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from lxml import etree
 from datetime import datetime
 
@@ -9,9 +9,12 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     location = '122.54,42.37'
-
+    specify_location = request.args.get('location', type=str)
+    print(specify_location)
+    if specify_location is not None:
+        location = specify_location
     # 彰武坐标  '122.54,42.37'
-    # 深圳代码  '101280601'
+    # '101282101'
     # 使用api获取数据
 
     key = '5c00cf403a6b46d4b2f5f6ea984ea8d4'
@@ -28,6 +31,9 @@ def index():
     response_for_warning = requests.get(
         'https://devapi.qweather.com/v7/warning/now?key=' + key + '&location=' + location)
     data_lookup = response_for_lookup.json()
+    print(data_lookup)
+    if data_lookup['code'] != '200':
+        return "<h1>位置代码或信息输入错误</h1>"
     url = data_lookup['location'][0]['fxLink']
 
     # url = 'https://www.qweather.com/weather/zhangwu-101070902.html'
@@ -138,4 +144,4 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

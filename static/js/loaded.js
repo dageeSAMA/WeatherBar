@@ -148,7 +148,7 @@ document.getElementById('9-hours-later').innerHTML = currentHourArr[4] + ":00";
 document.getElementById('11-hours-later').innerHTML = currentHourArr[5] + ":00";
 document.getElementById('13-hours-later').innerHTML = currentHourArr[6] + ":00";
 //整体
-let backgroundStyle = document.getElementById('background').style;
-if (!backgroundStyle.backgroundImage) {
-    backgroundStyle.backgroundColor = 'black';
-}
+// let backgroundStyle = document.getElementById('background').style;
+// if (!backgroundStyle.backgroundImage) {
+//     backgroundStyle.backgroundColor = 'black';
+// }

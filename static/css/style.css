@@ -1,10 +1,13 @@
 * {
     box-sizing: border-box;
 }
-p{
+
+p, i {
     font-size: 20px;
     padding: 5px;
+    color: var(--text-black-1);
 }
+
 body, html {
     overflow-y: hidden;
     overflow-x: hidden;
@@ -32,20 +35,19 @@ body, html {
     box-sizing: border-box;
 
 }
-.frame{
+
+.frame {
     margin: 10px;
     border-radius: 15px;
     box-sizing: border-box;
-    color: white; /* 设置文字颜色 */
-    font-family: Arial, sans-serif; /* 设置字体 */
     text-align: center; /* 文字居中 */
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
 }
-.layout p{
+
+.layout p {
     margin: 5px;
     padding: 5px;
     box-sizing: border-box;
-    color: white; /* 设置文字颜色 */
     font-family: Arial, sans-serif; /* 设置字体 */
     text-align: center; /* 文字居中 */
 }
@@ -56,8 +58,9 @@ body, html {
     justify-content: center;
     align-items: center;
 }
-.vertical p{
-    text-align:  center;
+
+.vertical p {
+    text-align: center;
 }
 
 .horizontal {
@@ -72,7 +75,6 @@ body, html {
 #frame1 {
     height: 440px;
     width: 440px;
-    background-color: #333;
 }
 
 #frame1 p {
@@ -83,14 +85,15 @@ body, html {
 #frame2 {
     height: 440px;
     width: 440px;
-    background-color: #333;
     justify-content: center;
     align-items: center;
 
 }
-#location-name p{
+
+#location-name p {
     font-size: 30px;
 }
+
 #frame2 .weather-icon i {
     font-size: 150px;
     line-height: unset;
@@ -101,7 +104,6 @@ body, html {
 #frame3 {
     height: 440px;
     flex-grow: 1;
-    background-color: #333;
     background-position: right top;
     background-repeat: no-repeat;
 
@@ -137,74 +139,84 @@ body, html {
     background-image: url("../images/temp_bar_bg.png");
     background-repeat: repeat-x;
 }
-.weather-forecast{
+
+.weather-forecast {
     margin: 0 20px;
 }
-.next-12-hours{
+
+.next-12-hours {
     justify-content: space-around;
 }
-.next-12-hours p{
-    width: 70px;
-    height: 30px;
-    display: block;
-}
-.temp-forecast{
+
+.temp-forecast {
     display: flex;
     margin: 0;
     height: 130px;
     justify-content: flex-end;
 }
-.temp-forecast p{
+
+.temp-forecast p {
     font-size: 20px;
 }
-.temp-node{
+
+.temp-node {
     width: 5px;
     border-radius: 3px;
     background-image: url("../images/temp_bar_bg.png");
     background-repeat: repeat-x;
 }
-.next-hours-text{
-    margin: 10px 0;
-    width: 70px;
-    border: #777777 solid 10px;
-    border-radius: 10px;
-    display: block;
-    background-clip: padding-box;
-    background-color: #777777;
 
+.next-hours-text {
+    margin: 10px 0;
+    height: 40px;
+    width: 70px;
+    border-radius: 10px;
+    background-clip: padding-box;
+    background-color: var(--city-weather-current-background-color);
+    line-height: 30px;
+    font-size: 17px;
+    color: var(--text-black-1);;
 }
-.precip-forecast{
+
+.precip-forecast {
     display: flex;
     margin: 0;
     height: 110px;
     justify-content: flex-start;
 
 }
+
 .precip-node {
     width: 20px;
     background-color: #30879C;
+
 }
-#frame3 i{
+
+#frame3 i {
     font-size: 30px;
 }
-#weather-snapshot{
+
+#weather-snapshot {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 45px;
 }
-#weather-snapshot p{
+
+#weather-snapshot p {
     padding: unset;
     font-size: 20px;
 }
+
 #warning {
     height: 60px;
     width: 80%;
     border-radius: 15px;
 
 }
-#warning p{
+
+#warning p {
 
     opacity: 1;
 }

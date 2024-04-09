@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <link href="../static/QWeather-Icons-1.6.0/font/qweather-icons.css" rel="stylesheet">
+    <link href="../static/css/style-zh.css" rel="stylesheet">
+    <link href="../static/css/style.css" rel="stylesheet">
+    <script src="../static/js/lunar.js"></script>
+</head>
+<body class="theme--{{ data.theme }}">
+<div class="{{ data.current_weather_bg_class }}" id="background">
+    <div class="main-container">
+        <div class="frame vertical" id="frame1">
+            <p title="现在时间" id="current-time"></p>
+            <p title="现在日期" id="current-date"></p>
+            <p title="现在阴历" id="current-lunar"></p>
+        </div>
+        <div class="frame vertical" id="frame2">
+            <div id="location-name">
+                <p>{{ data.location_name }}</p>
+            </div>
+            <div class="layout horizontal">
+                <div class="layout vertical" id="weather">
+                    <div class="weather-icon">
+                        <i title="今日天气图标" class="qi-{{ data.now_icon }}"></i>
+                    </div>
+                    <div id="current-weather">
+                        <p title="当前天气描述">{{ data.now_weather }}</p><br>
+                    </div>
+                </div>
+                <div style="width: 20px"></div>
+                <div class="layout vertical" style="height: 200px;justify-content: space-between">
+                    <p title="当天最高温度">最高气温</p>
+                    <p title="当前气温">当前温度</p>
+                    <p title="当天最低温度">最低气温</p>
+                </div>
+                <div id="temperature-bar"></div>
+                <div class="layout vertical" style="height: 200px;justify-content: space-between">
+                    <p title="当天最高温度" id="today-highest-temp">{{ data.today_highest_temp }}℃</p>
+                    <p title="当前气温">{{ data.now_temp }}℃</p>
+                    <p title="当天最低温度" id="today-lowest-temp">{{ data.today_lowest_temp }}℃</p>
+
+                </div>
+            </div>
+            {% if weather_warnings.warning_exist == 1  %}
+            <div class="layout horizontal" id="warning" style="background-color: {{ weather_warnings.severity_color }}">
+                <i class="qi-{{ weather_warnings.type }}"></i>&nbsp<p>{{ weather_warnings.type_name }}</p>
+            </div>
+            {% endif %}
+
+        </div>
+        <div class="frame vertical current-weather__bg" id="frame3">
+
+            <div class="layout horizontal next-12-hours">
+                <div class="layout vertical weather-forecast">
+                    <div class="temp-forecast vertical">
+                        <p class="temp-text">{{ data.a1h_temp }}℃</p>
+                        <div class="temp-node" style="height: 100%;"></div>
+                    </div>
+                    <div class="next-hours-text" id="1-hours-later"></div>
+                    <div class="precip-forecast vertical">
+                        <div class="precip-node" style="height: 100%;"></div>
+                        <p class="precip-text">{{ data.a1h_precip }}mm</p>
+                    </div>
+                    <div class="weather-icon">
+                        <i class="qi-{{ data.a1h_icon }}"></i>
+                    </div>
+                </div>
+                <div class="layout vertical weather-forecast">
+                    <div class="temp-forecast vertical">
+                        <p class="temp-text">{{ data.a3h_temp }}℃</p>
+                        <div class="temp-node" style="height: 15%;"></div>
+                    </div>
+                    <div class="next-hours-text" id="3-hours-later"></div>
+                    <div class="precip-forecast vertical">
+                        <div class="precip-node" style="height: 10%;"></div>
+                        <p class="precip-text">{{ data.a3h_precip }}mm</p>
+                    </div>
+                    <div class="weather-icon">
+                        <i class="qi-{{ data.a3h_icon }}"></i>
+                    </div>
+                </div>
+                <div class="layout vertical weather-forecast">
+                    <div class="temp-forecast vertical">
+                        <p class="temp-text">{{ data.a5h_temp }}℃</p>
+                        <div class="temp-node" style="height: 40%;"></div>
+                    </div>
+                    <div class="next-hours-text" id="5-hours-later"></div>
+                    <div class="precip-forecast vertical">
+                        <div class="precip-node" style="height: 10%;"></div>
+                        <p class="precip-text">{{ data.a5h_precip }}mm</p>
+                    </div>
+                    <div class="weather-icon">
+                        <i class="qi-{{ data.a5h_icon }}"></i>
+                    </div>
+                </div>
+                <div class="layout vertical weather-forecast">
+                    <div class="temp-forecast vertical">
+                        <p class="temp-text">{{ data.a7h_temp }}℃</p>
+                        <div class="temp-node" style="height: 90%;"></div>
+                    </div>
+                    <div class="next-hours-text" id="7-hours-later"></div>
+                    <div class="precip-forecast vertical">
+                        <div class="precip-node" style="height: 00%;"></div>
+                        <p class="precip-text">{{ data.a7h_precip }}mm</p>
+                    </div>
+                    <div class="weather-icon">
+                        <i class="qi-{{ data.a7h_icon }}"></i>
+                    </div>
+                </div>
+                <div class="layout vertical weather-forecast">
+                    <div class="temp-forecast vertical">
+                        <p class="temp-text">{{ data.a9h_temp }}℃</p>
+                        <div class="temp-node" style="height: 40%;"></div>
+                    </div>
+                    <div class="next-hours-text" id="9-hours-later"></div>
+                    <div class="precip-forecast vertical">
+                        <div class="precip-node" style="height: 40%;"></div>
+                        <p class="precip-text">{{ data.a9h_precip }}mm</p>
+                    </div>
+                    <div class="weather-icon">
+                        <i class="qi-{{ data.a9h_icon }}"></i>
+                    </div>
+                </div>
+                <div class="layout vertical weather-forecast">
+                    <div class="temp-forecast vertical">
+                        <p class="temp-text">{{ data.a11h_temp }}℃</p>
+                        <div class="temp-node" style="height: 40%;"></div>
+                    </div>
+                    <div class="next-hours-text" id="11-hours-later"></div>
+                    <div class="precip-forecast vertical">
+                        <div class="precip-node" style="height: 20%;"></div>
+                        <p class="precip-text">{{ data.a11h_precip }}mm</p>
+                    </div>
+                    <div class="weather-icon">
+                        <i class="qi-{{ data.a11h_icon }}"></i>
+                    </div>
+                </div>
+                <div class="layout vertical weather-forecast">
+                    <div class="temp-forecast vertical">
+                        <p class="temp-text">{{ data.a13h_temp }}℃</p>
+                        <div class="temp-node" style="height: 40%;"></div>
+                    </div>
+                    <div class="next-hours-text" id="13-hours-later"></div>
+                    <div class="precip-forecast vertical">
+                        <div class="precip-node" style="height: 20%;"></div>
+                        <p class="precip-text">{{ data.a13h_precip }}mm</p>
+                    </div>
+                    <div class="weather-icon">
+                        <i class="qi-{{ data.a13h_icon }}"></i>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="weather-snapshot">
+                <p>{{ data.today_weather_text }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+<script src="../static/js/loaded.js"></script>
+</html>

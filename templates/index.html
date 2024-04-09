@@ -10,14 +10,14 @@
     <script src="../static/js/lunar.js"></script>
 </head>
 <body class="theme--{{ data.theme }}">
-<div class="{{ data.current_weather_bg_class }}" id="background">
+<div class="" id="background">
     <div class="main-container">
-        <div class="frame vertical" id="frame1">
+        <div class="frame vertical {{ data.current_weather_bg_class }}" id="frame1">
             <p title="现在时间" id="current-time"></p>
             <p title="现在日期" id="current-date"></p>
             <p title="现在阴历" id="current-lunar"></p>
         </div>
-        <div class="frame vertical" id="frame2">
+        <div class="frame vertical {{ data.current_weather_bg_class }}" id="frame2">
             <div id="location-name">
                 <p>{{ data.location_name }}</p>
             </div>
@@ -51,110 +51,109 @@
             {% endif %}
 
         </div>
-        <div class="frame vertical current-weather__bg" id="frame3">
-
-            <div class="layout horizontal next-12-hours">
-                <div class="layout vertical weather-forecast">
-                    <div class="temp-forecast vertical">
-                        <p class="temp-text">{{ data.a1h_temp }}℃</p>
-                        <div class="temp-node" style="height: 100%;"></div>
+        <div class="frame vertical {{ data.current_weather_bg_class }}" id="frame3">
+            <div class="current-weather__bg ">
+                <div class="layout horizontal next-12-hours">
+                    <div class="layout vertical weather-forecast">
+                        <div class="temp-forecast vertical">
+                            <p class="temp-text">{{ data.a1h_temp }}℃</p>
+                            <div class="temp-node"></div>
+                        </div>
+                        <p class="next-hours-text" id="1-hours-later"></p>
+                        <div class="precip-forecast vertical">
+                            <div class="precip-node"></div>
+                            <p class="precip-text">{{ data.a1h_precip }}mm</p>
+                        </div>
+                        <div class="weather-icon">
+                            <i class="qi-{{ data.a1h_icon }}"></i>
+                        </div>
                     </div>
-                    <div class="next-hours-text" id="1-hours-later"></div>
-                    <div class="precip-forecast vertical">
-                        <div class="precip-node" style="height: 100%;"></div>
-                        <p class="precip-text">{{ data.a1h_precip }}mm</p>
+                    <div class="layout vertical weather-forecast">
+                        <div class="temp-forecast vertical">
+                            <p class="temp-text">{{ data.a3h_temp }}℃</p>
+                            <div class="temp-node"></div>
+                        </div>
+                        <p class="next-hours-text" id="3-hours-later"></p>
+                        <div class="precip-forecast vertical">
+                            <div class="precip-node"></div>
+                            <p class="precip-text">{{ data.a3h_precip }}mm</p>
+                        </div>
+                        <div class="weather-icon">
+                            <i class="qi-{{ data.a3h_icon }}"></i>
+                        </div>
                     </div>
-                    <div class="weather-icon">
-                        <i class="qi-{{ data.a1h_icon }}"></i>
+                    <div class="layout vertical weather-forecast">
+                        <div class="temp-forecast vertical">
+                            <p class="temp-text">{{ data.a5h_temp }}℃</p>
+                            <div class="temp-node"></div>
+                        </div>
+                        <p class="next-hours-text" id="5-hours-later"></p>
+                        <div class="precip-forecast vertical">
+                            <div class="precip-node"></div>
+                            <p class="precip-text">{{ data.a5h_precip }}mm</p>
+                        </div>
+                        <div class="weather-icon">
+                            <i class="qi-{{ data.a5h_icon }}"></i>
+                        </div>
                     </div>
-                </div>
-                <div class="layout vertical weather-forecast">
-                    <div class="temp-forecast vertical">
-                        <p class="temp-text">{{ data.a3h_temp }}℃</p>
-                        <div class="temp-node" style="height: 15%;"></div>
+                    <div class="layout vertical weather-forecast">
+                        <div class="temp-forecast vertical">
+                            <p class="temp-text">{{ data.a7h_temp }}℃</p>
+                            <div class="temp-node"></div>
+                        </div>
+                        <p class="next-hours-text" id="7-hours-later"></p>
+                        <div class="precip-forecast vertical">
+                            <div class="precip-node"></div>
+                            <p class="precip-text">{{ data.a7h_precip }}mm</p>
+                        </div>
+                        <div class="weather-icon">
+                            <i class="qi-{{ data.a7h_icon }}"></i>
+                        </div>
                     </div>
-                    <div class="next-hours-text" id="3-hours-later"></div>
-                    <div class="precip-forecast vertical">
-                        <div class="precip-node" style="height: 10%;"></div>
-                        <p class="precip-text">{{ data.a3h_precip }}mm</p>
+                    <div class="layout vertical weather-forecast">
+                        <div class="temp-forecast vertical">
+                            <p class="temp-text">{{ data.a9h_temp }}℃</p>
+                            <div class="temp-node"></div>
+                        </div>
+                        <p class="next-hours-text" id="9-hours-later"></p>
+                        <div class="precip-forecast vertical">
+                            <div class="precip-node"></div>
+                            <p class="precip-text">{{ data.a9h_precip }}mm</p>
+                        </div>
+                        <div class="weather-icon">
+                            <i class="qi-{{ data.a9h_icon }}"></i>
+                        </div>
                     </div>
-                    <div class="weather-icon">
-                        <i class="qi-{{ data.a3h_icon }}"></i>
+                    <div class="layout vertical weather-forecast">
+                        <div class="temp-forecast vertical">
+                            <p class="temp-text">{{ data.a11h_temp }}℃</p>
+                            <div class="temp-node"></div>
+                        </div>
+                        <p class="next-hours-text" id="11-hours-later"></p>
+                        <div class="precip-forecast vertical">
+                            <div class="precip-node"></div>
+                            <p class="precip-text">{{ data.a11h_precip }}mm</p>
+                        </div>
+                        <div class="weather-icon">
+                            <i class="qi-{{ data.a11h_icon }}"></i>
+                        </div>
                     </div>
-                </div>
-                <div class="layout vertical weather-forecast">
-                    <div class="temp-forecast vertical">
-                        <p class="temp-text">{{ data.a5h_temp }}℃</p>
-                        <div class="temp-node" style="height: 40%;"></div>
-                    </div>
-                    <div class="next-hours-text" id="5-hours-later"></div>
-                    <div class="precip-forecast vertical">
-                        <div class="precip-node" style="height: 10%;"></div>
-                        <p class="precip-text">{{ data.a5h_precip }}mm</p>
-                    </div>
-                    <div class="weather-icon">
-                        <i class="qi-{{ data.a5h_icon }}"></i>
-                    </div>
-                </div>
-                <div class="layout vertical weather-forecast">
-                    <div class="temp-forecast vertical">
-                        <p class="temp-text">{{ data.a7h_temp }}℃</p>
-                        <div class="temp-node" style="height: 90%;"></div>
-                    </div>
-                    <div class="next-hours-text" id="7-hours-later"></div>
-                    <div class="precip-forecast vertical">
-                        <div class="precip-node" style="height: 00%;"></div>
-                        <p class="precip-text">{{ data.a7h_precip }}mm</p>
-                    </div>
-                    <div class="weather-icon">
-                        <i class="qi-{{ data.a7h_icon }}"></i>
-                    </div>
-                </div>
-                <div class="layout vertical weather-forecast">
-                    <div class="temp-forecast vertical">
-                        <p class="temp-text">{{ data.a9h_temp }}℃</p>
-                        <div class="temp-node" style="height: 40%;"></div>
-                    </div>
-                    <div class="next-hours-text" id="9-hours-later"></div>
-                    <div class="precip-forecast vertical">
-                        <div class="precip-node" style="height: 40%;"></div>
-                        <p class="precip-text">{{ data.a9h_precip }}mm</p>
-                    </div>
-                    <div class="weather-icon">
-                        <i class="qi-{{ data.a9h_icon }}"></i>
-                    </div>
-                </div>
-                <div class="layout vertical weather-forecast">
-                    <div class="temp-forecast vertical">
-                        <p class="temp-text">{{ data.a11h_temp }}℃</p>
-                        <div class="temp-node" style="height: 40%;"></div>
-                    </div>
-                    <div class="next-hours-text" id="11-hours-later"></div>
-                    <div class="precip-forecast vertical">
-                        <div class="precip-node" style="height: 20%;"></div>
-                        <p class="precip-text">{{ data.a11h_precip }}mm</p>
-                    </div>
-                    <div class="weather-icon">
-                        <i class="qi-{{ data.a11h_icon }}"></i>
-                    </div>
-                </div>
-                <div class="layout vertical weather-forecast">
-                    <div class="temp-forecast vertical">
-                        <p class="temp-text">{{ data.a13h_temp }}℃</p>
-                        <div class="temp-node" style="height: 40%;"></div>
-                    </div>
-                    <div class="next-hours-text" id="13-hours-later"></div>
-                    <div class="precip-forecast vertical">
-                        <div class="precip-node" style="height: 20%;"></div>
-                        <p class="precip-text">{{ data.a13h_precip }}mm</p>
-                    </div>
-                    <div class="weather-icon">
-                        <i class="qi-{{ data.a13h_icon }}"></i>
+                    <div class="layout vertical weather-forecast">
+                        <div class="temp-forecast vertical">
+                            <p class="temp-text">{{ data.a13h_temp }}℃</p>
+                            <div class="temp-node"></div>
+                        </div>
+                        <p class="next-hours-text" id="13-hours-later"></p>
+                        <div class="precip-forecast vertical">
+                            <div class="precip-node"></div>
+                            <p class="precip-text">{{ data.a13h_precip }}mm</p>
+                        </div>
+                        <div class="weather-icon">
+                            <i class="qi-{{ data.a13h_icon }}"></i>
+                        </div>
                     </div>
                 </div>
             </div>
-
-
             <div id="weather-snapshot">
                 <p>{{ data.today_weather_text }}</p>
             </div>
