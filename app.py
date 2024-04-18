@@ -1,6 +1,8 @@
-import re
+import os
+import signal
+
 import requests
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, after_this_request
 from lxml import etree
 from datetime import datetime
 
@@ -11,7 +13,6 @@ app = Flask(__name__)
 def index():
     location = '122.54,42.37'
     specify_location = request.args.get('location', type=str)
-    print(specify_location)
     if specify_location is not None:
         location = specify_location
     # 彰武坐标  '122.54,42.37'
@@ -22,19 +23,6 @@ def index():
     # 使用api查询位置坐标静态页
     response_for_lookup = requests.get(
         'https://geoapi.qweather.com/v2/city/lookup?key=' + key + '&location=' + location)
-
-    data_lookup = response_for_lookup.json()
-    if data_lookup['code'] != '200':
-        return "<h1>位置代码或信息输入错误</h1>"
-    url = data_lookup['location'][0]['fxLink']
-
-    # 处理fxLink以获得位置代码
-    match_location_code = re.search(r'-(\d+)\.', url)
-    if match_location_code:
-        location = match_location_code.group(1)
-        print("match_location_code", location)
-    else:
-        return "<h1>位置代码或信息输入错误</h1>"
     # 使用api查询当前天气
     response_for_now = requests.get('https://devapi.qweather.com/v7/weather/now?key=' + key + '&location=' + location)
     # 使用api查询24h天气
@@ -44,6 +32,10 @@ def index():
     # 使用api查询预警
     response_for_warning = requests.get(
         'https://devapi.qweather.com/v7/warning/now?key=' + key + '&location=' + location)
+    data_lookup = response_for_lookup.json()
+    if data_lookup['code'] != '200':
+        return "<h1>位置代码或信息输入错误</h1>"
+    url = data_lookup['location'][0]['fxLink']
 
     # url = 'https://www.qweather.com/weather/zhangwu-101070902.html'
     # 向url进行requests
@@ -148,8 +140,13 @@ def index():
             'type_name': data_warning['warning'][0]['typeName']
 
         }
-    print(weather_warnings)
     return render_template("index.html", data=data, weather_warnings=weather_warnings)
+
+
+@app.route('/shutdown', methods=['POST'])
+def shutdown():
+    os.kill(os.getpid(), signal.SIGTERM)
+    # curl -X POST localhost:5000/shutdown
 
 
 if __name__ == '__main__':
