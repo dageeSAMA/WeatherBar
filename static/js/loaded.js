@@ -18,6 +18,7 @@ function updateCurrentTime() {
 // 更新当前时间
 updateCurrentTime();
 
+
 // 获取当前日期
 let options = {year: 'numeric', month: 'long', day: 'numeric'};
 let currentDate = new Date().toLocaleDateString('zh-CN', options);
@@ -36,21 +37,31 @@ let todayHighestTemp = parseInt(document.getElementById("today-highest-temp").te
 let todayLowestTemp = parseInt(document.getElementById("today-lowest-temp").textContent.replace("℃", ""));
 let temperatureBar = document.getElementById("temperature-bar");
 // 1：缩放较小；2缩放较大
-const switchVersion = 2;
+const zoomer = 1.5;
 let zoom,zoomValue,offsetValue;
-if (switchVersion === 1) {
-    zoom = 200/500 * (100 / (todayHighestTemp - todayLowestTemp));
-    zoomValue = 500/200 * 100 * zoom;
-    offsetValue = 500 * zoom *(todayHighestTemp - 50) /100*2;
-}
-if (switchVersion === 2) {
-    zoom = 200/500 * (100 / (todayHighestTemp - todayLowestTemp)) / 2;
-    zoomValue = 500/200 * 100 * zoom;
-    // offsetValue = -(50 - todayHighestTemp - (todayHighestTemp - (todayHighestTemp + todayLowestTemp) / 2)) * 5 * zoom;
-    offsetValue = -500*zoom*((todayLowestTemp-50)/100)-500*zoom;
+// if (zoomer === 2) {
+//     zoom = 200/500*100 / (todayHighestTemp - todayLowestTemp);
+//     zoomValue = (500*zoom)/200*100;
+//     offsetValue = (-50-todayLowestTemp)/100*500 * zoom;
+//
+//     console.log("offsetValue:",offsetValue)
+//     console.log("zoom:",zoom)
+//     console.log("zoomValue:",zoomValue)
+// }
+// if (zoomer === 1) {
+    todayHighestTempZoomed = (todayHighestTemp + todayLowestTemp) / 2 + (todayHighestTemp - todayLowestTemp) * zoomer/2;
+    todayLowestTempZoomed = (todayHighestTemp + todayLowestTemp) / 2 - (todayHighestTemp - todayLowestTemp) * zoomer/2;
+
+    zoom = 200/500*100 / (todayHighestTempZoomed - todayLowestTempZoomed);
+    zoomValue = (500*zoom)/200*100;
+    offsetValue = (-50-todayLowestTempZoomed)/100*500 * zoom;
+
+    console.log("todayHighestTempZoomed:",todayHighestTempZoomed)
+    console.log("todayLowestTempZoomed:",todayLowestTempZoomed)
     console.log("offsetValue:",offsetValue)
     console.log("zoom:",zoom)
-}
+    console.log("zoomValue:",zoomValue)
+//}
     temperatureBar.style.backgroundSize = "auto " + zoomValue + "%";
     temperatureBar.style.backgroundPosition = "center bottom " + offsetValue + "px";
 

@@ -44,10 +44,11 @@
 
                 </div>
             </div>
-            {% if weather_warnings.warning_exist == 1  %}
-            <div class="layout horizontal" id="warning" style="background-color: {{ weather_warnings.severity_color }}">
-                <i class="qi-{{ weather_warnings.type }}"></i>&nbsp<p>{{ weather_warnings.type_name }}</p>
-            </div>
+            {% if weather_warnings.warning_exist == 1 %}
+                <div class="layout horizontal" id="warning"
+                     style="background-color: {{ weather_warnings.severity_color }}">
+                    <i class="qi-{{ weather_warnings.type }}"></i>&nbsp<p>{{ weather_warnings.type_name }}</p>
+                </div>
             {% endif %}
 
         </div>
@@ -163,4 +164,34 @@
 </body>
 
 <script src="../static/js/loaded.js"></script>
+<script>
+    const now = new Date();
+    const sunriseTime = "{{ data.sunrise_time }}";
+    const sunsetTime = "{{ data.sunset_time }}";
+
+    // 设置指定的时间（8 点 20 分）
+    function setReloadDate(dateStr) {
+        let parts = dateStr.split(':');
+        let targetDate = new Date();
+        targetDate.setHours(parts[0]);
+        targetDate.setMinutes(parts[1]);
+        // 计算时间差（以毫秒为单位）
+        const timeDifference = targetDate - new Date();
+        console.log(new Date())
+        console.log("targetDate:"+targetDate)
+        if (timeDifference <= 0) {// 如果时间差为负数，表示已经过了指定时间，不必刷新
+            console.log("timeDifference:"+timeDifference)
+        } else {// 延迟指定时间后刷新网页
+            console.log("将在"+timeDifference/1000/60+"分钟后刷新网页")
+            setTimeout(() => {
+                location.reload();
+            }, timeDifference);
+        }
+    }
+    setReloadDate(sunriseTime);
+    setReloadDate(sunsetTime);
+
+
+
+</script>
 </html>

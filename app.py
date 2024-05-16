@@ -25,6 +25,7 @@ def index():
         'https://geoapi.qweather.com/v2/city/lookup?key=' + key + '&location=' + location)
     # 使用api查询当前天气
     response_for_now = requests.get('https://devapi.qweather.com/v7/weather/now?key=' + key + '&location=' + location)
+
     # 使用api查询24h天气
     response_for_24h = requests.get('https://devapi.qweather.com/v7/weather/24h?key=' + key + '&location=' + location)
     # 使用api查询3天预报
@@ -62,8 +63,8 @@ def index():
         today_date = datetime.now().date()
 
         # 设定日出和日落时间
-        sunrise_time = datetime.combine(today_date, datetime.strptime("05:30", "%H:%M").time())
-        sunset_time = datetime.combine(today_date, datetime.strptime("18:30", "%H:%M").time())
+        sunrise_time = datetime.combine(today_date, datetime.strptime(data_3days['daily'][0]['sunrise'], "%H:%M").time())
+        sunset_time = datetime.combine(today_date, datetime.strptime(data_3days['daily'][0]['sunset'], "%H:%M").time())
 
         # 获取当前时间
         current_time = datetime.now()
@@ -86,6 +87,8 @@ def index():
         'now_temp': data_now['now']['temp'],
         'today_lowest_temp': data_3days['daily'][0]['tempMin'],
         'today_highest_temp': data_3days['daily'][0]['tempMax'],
+        'sunrise_time': data_3days['daily'][0]['sunrise'],
+        'sunset_time': data_3days['daily'][0]['sunset'],
         'a1h_temp': data_24h['hourly'][0]['temp'],
         'a3h_temp': data_24h['hourly'][2]['temp'],
         'a5h_temp': data_24h['hourly'][4]['temp'],
