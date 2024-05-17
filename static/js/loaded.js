@@ -38,7 +38,7 @@ let todayLowestTemp = parseInt(document.getElementById("today-lowest-temp").text
 let temperatureBar = document.getElementById("temperature-bar");
 // 1：缩放较小；2缩放较大
 const zoomer = 1.5;
-let zoom,zoomValue,offsetValue;
+let zoom, zoomValue, offsetValue;
 // if (zoomer === 2) {
 //     zoom = 200/500*100 / (todayHighestTemp - todayLowestTemp);
 //     zoomValue = (500*zoom)/200*100;
@@ -49,22 +49,21 @@ let zoom,zoomValue,offsetValue;
 //     console.log("zoomValue:",zoomValue)
 // }
 // if (zoomer === 1) {
-    todayHighestTempZoomed = (todayHighestTemp + todayLowestTemp) / 2 + (todayHighestTemp - todayLowestTemp) * zoomer/2;
-    todayLowestTempZoomed = (todayHighestTemp + todayLowestTemp) / 2 - (todayHighestTemp - todayLowestTemp) * zoomer/2;
+todayHighestTempZoomed = (todayHighestTemp + todayLowestTemp) / 2 + (todayHighestTemp - todayLowestTemp) * zoomer / 2;
+todayLowestTempZoomed = (todayHighestTemp + todayLowestTemp) / 2 - (todayHighestTemp - todayLowestTemp) * zoomer / 2;
 
-    zoom = 200/500*100 / (todayHighestTempZoomed - todayLowestTempZoomed);
-    zoomValue = (500*zoom)/200*100;
-    offsetValue = (-50-todayLowestTempZoomed)/100*500 * zoom;
+zoom = 200 / 500 * 100 / (todayHighestTempZoomed - todayLowestTempZoomed);
+zoomValue = (500 * zoom) / 200 * 100;
+offsetValue = (-50 - todayLowestTempZoomed) / 100 * 500 * zoom;
 
-    console.log("todayHighestTempZoomed:",todayHighestTempZoomed)
-    console.log("todayLowestTempZoomed:",todayLowestTempZoomed)
-    console.log("offsetValue:",offsetValue)
-    console.log("zoom:",zoom)
-    console.log("zoomValue:",zoomValue)
+console.log("todayHighestTempZoomed:", todayHighestTempZoomed)
+console.log("todayLowestTempZoomed:", todayLowestTempZoomed)
+console.log("offsetValue:", offsetValue)
+console.log("zoom:", zoom)
+console.log("zoomValue:", zoomValue)
 //}
-    temperatureBar.style.backgroundSize = "auto " + zoomValue + "%";
-    temperatureBar.style.backgroundPosition = "center bottom " + offsetValue + "px";
-
+temperatureBar.style.backgroundSize = "auto " + zoomValue + "%";
+temperatureBar.style.backgroundPosition = "center bottom " + offsetValue + "px";
 
 
 //frame3
@@ -132,8 +131,8 @@ for (let i = 0; i <= 6; i++) {
     // let zoomValueTini = (200 * zoomValue) / (tempNode[i].getBoundingClientRect().height)/2.222;
     let zoomValueTini = zoomValue * 90 / (tempNode[i].getBoundingClientRect().height);
     tempNode[i].style.backgroundSize = "auto " + zoomValueTini + "%";
-    console.log((90-tempNode[i].getBoundingClientRect().height)+ "px");
-    tempNode[i].style.backgroundPosition = "center bottom " +offsetValue/2.222+"px";
+    console.log((90 - tempNode[i].getBoundingClientRect().height) + "px");
+    tempNode[i].style.backgroundPosition = "center bottom " + offsetValue / 2.222 + "px";
 }
 
 function getHoursArr(cHour) {
@@ -163,3 +162,4 @@ document.getElementById('13-hours-later').innerHTML = currentHourArr[6] + ":00";
 // if (!backgroundStyle.backgroundImage) {
 //     backgroundStyle.backgroundColor = 'black';
 // }
+
